@@ -1,0 +1,12 @@
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.deps.json
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.Infarstructure.dll
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\bin\Debug\netcoreapp3.1\MISA.Infarstructure.pdb
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csprojAssemblyReference.cache
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.AssemblyInfoInputs.cache
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.AssemblyInfo.cs
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.CoreCompileInputs.cache
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.csproj.CopyComplete
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.ApplicationCore\obj\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb

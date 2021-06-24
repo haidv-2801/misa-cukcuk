@@ -1,0 +1,9 @@
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infarstructure.csprojAssemblyReference.cache
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infarstructure.AssemblyInfoInputs.cache
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infarstructure.AssemblyInfo.cs
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infarstructure.csproj.CoreCompileInputs.cache
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\netcoreapp3.1\MISA.Infarstructure.deps.json
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\netcoreapp3.1\MISA.Infarstructure.dll
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\netcoreapp3.1\MISA.Infarstructure.pdb
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infarstructure.dll
+D:\MF866_HAIDV\MISA.CukCuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infarstructure.pdb
