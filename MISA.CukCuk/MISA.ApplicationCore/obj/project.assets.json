@@ -168,19 +168,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dvhai\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
+      "projectUniqueName": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
       "projectName": "MISA.ApplicationCore",
-      "projectPath": "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
-      "packagesPath": "C:\\Users\\dvhai\\.nuget\\packages\\",
-      "outputPath": "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\obj\\",
+      "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.ApplicationCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\dvhai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -194,8 +194,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj": {
-              "projectPath": "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj"
+            "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj": {
+              "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj"
             }
           }
         }

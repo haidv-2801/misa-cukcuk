@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj": {}
+    "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj": {}
   },
   "projects": {
-    "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj": {
+    "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj",
+        "projectUniqueName": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj",
         "projectName": "MISA.Infarstructure",
-        "projectPath": "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj",
-        "packagesPath": "C:\\Users\\dvhai\\.nuget\\packages\\",
-        "outputPath": "D:\\MF866_HAIDV\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\obj\\",
+        "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj",
+        "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+        "outputPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\dvhai\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

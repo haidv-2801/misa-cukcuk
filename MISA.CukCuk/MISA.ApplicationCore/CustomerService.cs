@@ -8,6 +8,13 @@ namespace MISA.ApplicationCore
 {
     public class CustomerService
     {
+        ICustomerRepository customerRepository;
+
+        public CustomerService()
+        {
+
+        }
+
         #region Method
         /// <summary>
         // Lấy toàn bộ khách hàng
@@ -19,6 +26,18 @@ namespace MISA.ApplicationCore
             var customerContext = new CustomerContext();
             var customers = customerContext.GetCustomers();
             return customers;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="customerCode">Mã nhân viên</param>
+        /// <returns>Null -  không tìm thấy</returns>
+        public Customer GetCustomerByCode(string customerCode)
+        {
+            var customerContext = new CustomerContext();
+            var customer = customerContext.GetCustomerByCode(customerCode);
+            return customer;
         }
 
         /// <summary>

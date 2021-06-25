@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using MySqlConnector;
-using MISA.CukCuk.Web.Models;
+using MISA.Infarstructure.Models;
 using System.Data;
 using MISA.ApplicationCore;
 
@@ -36,18 +36,15 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="id">id của khách hàng</param>
         /// <returns>Một khách hàng tìm được theo id</returns>
         /// CreateedBy: DVHAI 24/06/2021
-        [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        [HttpGet("{customerCode}")]
+        public IActionResult Get(string customerCode)
         {
-            var connectionString = "User Id=dev;" +
-                                    "Host=47.241.69.179;" +
-                                    "Port=3306;" +
-                                    "Password=12345678;" +
-                                    "Database=MISACukCuk_Demo;" +
-                                    "Character Set=utf8";
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
-            var customer = dbConnection.QueryFirstOrDefault<Customer>("Proc_GetCustomerById", new { CustomerId = id }, commandType: CommandType.StoredProcedure);
+            var customerService = new CustomerService();
+            var customer = customerService.GetCustomerByCode(customerCode);
 
+            if (customer == null)
+                return NotFound();
+            
             return Ok(customer);
         }
 

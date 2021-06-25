@@ -69,13 +69,9 @@ namespace MISA.Infarstructure
                 var propertyType = property.PropertyType;
 
                 if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
-                {
                     parameters.Add($"@{propertyName}", propertyValue, DbType.String);
-                }
                 else
-                {
                     parameters.Add($"@{propertyName}", propertyValue);
-                }
             }
 
             var connectionString = "User Id=dev;" +
