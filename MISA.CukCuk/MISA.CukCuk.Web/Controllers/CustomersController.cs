@@ -9,6 +9,7 @@ using MySqlConnector;
 using MISA.Infarstructure.Models;
 using System.Data;
 using MISA.ApplicationCore;
+using MISA.ApplicationCore.Interfaces;
 
 namespace MISA.CukCuk.Web.Controllers
 {
@@ -16,6 +17,14 @@ namespace MISA.CukCuk.Web.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+
+        ICustomerService _customerService;
+
+        public CustomersController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
+
         /// <summary>
         /// Lấy danh sách khách hàng
         /// </summary>
@@ -24,8 +33,7 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var customerService = new CustomerService();
-            var customers = customerService.GetCustomers();
+            var customers = _customerService.GetCustomers();
 
             return Ok(customers);
         }
@@ -39,12 +47,11 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpGet("{customerCode}")]
         public IActionResult Get(string customerCode)
         {
-            var customerService = new CustomerService();
-            var customer = customerService.GetCustomerByCode(customerCode);
+            var customer = _customerService.GetCustomerByCode(customerCode);
 
             if (customer == null)
                 return NotFound();
-            
+
             return Ok(customer);
         }
 
@@ -57,13 +64,9 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Customer customer)
         {
-            var customerService = new CustomerService();
-            var rowAffects = customerService.InsertCustomer(customer);
+            var rowAffects = _customerService.InsertCustomer(customer);
 
-            if (rowAffects > 0)
-                return Ok(customer);
-            else
-                return NoContent();
+            return Ok();
         }
 
         /// <summary>

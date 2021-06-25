@@ -51,6 +51,26 @@ namespace MISA.Infarstructure
             return customer;
         }
 
+        /// <summary>
+        /// Lấy thông tin khách hàng theo id
+        /// </summary>
+        /// <param name="customerId">Mã khách hàng</param>
+        /// <returns>Bản ghi thông tin khách hàng</returns>
+        /// CreatedBy: DVHAI (24/06/2021)
+        public Customer GetCustomerById(Guid customerId)
+        {
+            // Kết nối tới CSDL:
+            var connectionString = "User Id=dev;" +
+                                   "Host=47.241.69.179;" +
+                                   "Port=3306;" +
+                                   "Password=12345678;" +
+                                   "Database=MISACukCuk_Demo;" +
+                                   "Character Set=utf8";
+            IDbConnection dbConnection = new MySqlConnection(connectionString);
+            var customer = dbConnection.Query<Customer>("Proc_GetCustomerById", new { CustomerId = customerId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            
+            return customer;
+        }
 
         /// <summary>
         /// Thêm mới khách hàng

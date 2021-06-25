@@ -1,4 +1,6 @@
-﻿using MISA.Infarstructure;
+﻿using MISA.ApplicationCore.Entities;
+using MISA.ApplicationCore.Interfaces;
+using MISA.Infarstructure;
 using MISA.Infarstructure.Models;
 using System;
 using System.Collections.Generic;
@@ -6,13 +8,13 @@ using System.Text;
 
 namespace MISA.ApplicationCore
 {
-    public class CustomerService
+    public class CustomerService : ICustomerService
     {
-        ICustomerRepository customerRepository;
+        ICustomerRepository _customerRepository;
 
-        public CustomerService()
+        public CustomerService(ICustomerRepository customerRepository)
         {
-
+            _customerRepository = customerRepository;
         }
 
         #region Method
@@ -23,8 +25,7 @@ namespace MISA.ApplicationCore
         /// CreatedBy: DVHAI (24/06/2021)
         public IEnumerable<Customer> GetCustomers()
         {
-            var customerContext = new CustomerContext();
-            var customers = customerContext.GetCustomers();
+            var customers = _customerRepository.GetCustomers();
             return customers;
         }
 
@@ -35,8 +36,7 @@ namespace MISA.ApplicationCore
         /// <returns>Null -  không tìm thấy</returns>
         public Customer GetCustomerByCode(string customerCode)
         {
-            var customerContext = new CustomerContext();
-            var customer = customerContext.GetCustomerByCode(customerCode);
+            var customer = _customerRepository.GetCustomerByCode(customerCode);
             return customer;
         }
 
@@ -46,12 +46,24 @@ namespace MISA.ApplicationCore
         /// <param name="customer">Thông tin khách hàng</param>
         /// <returns>Số dòng bị ảnh hưởng</returns>
         /// CreatedBy: DVHAI (24/06/2021)
-        public int InsertCustomer(Customer customer)
+        public ServiceResult InsertCustomer(Customer customer)
         {
-            var customerContext = new CustomerContext();
-            var rowAffects = customerContext.InsertCustomer(customer);
+            throw new NotImplementedException();
+        }
 
-            return rowAffects;
+        public Customer GetCustomerById(Guid customerId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ServiceResult UpdateCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ServiceResult DeleteCustomer(Guid customerId)
+        {
+            throw new NotImplementedException();
         }
         #endregion
     }

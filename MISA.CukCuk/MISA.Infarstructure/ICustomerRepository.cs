@@ -11,6 +11,8 @@ namespace MISA.Infarstructure
         
         Customer GetCustomerById(Guid customerId);
 
+        Customer GetCustomerByCode(string customerCode);
+
         int InsertCustomer(Customer customer);
 
         int UpdateCustomer(Customer customer);

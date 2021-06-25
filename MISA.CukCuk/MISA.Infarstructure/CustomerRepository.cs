@@ -9,17 +9,29 @@ namespace MISA.Infarstructure
     {
         public int DeleteCustomer(Guid customerId)
         {
-            throw new NotImplementedException();
+            var customerContext = new CustomerContext();
+            return 1;
+        }
+
+        public Customer GetCustomerByCode(string customerCode)
+        {
+            var customerContext = new CustomerContext();
+            var customer = customerContext.GetCustomerByCode(customerCode);
+            return customer;
         }
 
         public Customer GetCustomerById(Guid customerId)
         {
-            throw new NotImplementedException();
+            var customerContext = new CustomerContext();
+            var customer = customerContext.GetCustomerById(customerId);
+            return customer;
         }
 
         public IEnumerable<Customer> GetCustomers()
         {
-            throw new NotImplementedException();
+            var customerContext = new CustomerContext();
+            var customer = customerContext.GetCustomers();
+            return customer;
         }
 
         public int InsertCustomer(Customer customer)

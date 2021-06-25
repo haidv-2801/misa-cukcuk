@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "CBQWhPOmoYRvTN2pRFieHXPDb2RsVBTsINgLqkDQlb8ky/HZaje6LDnooFdNDU9OLZdhGzwSKIqKcSwVo6rwVw==",
+  "dgSpecHash": "OsZa/HZJvnCtWOprCj44No7stuEGuTKcQs8aZQ5zl9LTo9boYHeG31XiVuQLA3uiatm4Vbbjc/UnO899d/SkRQ==",
   "success": true,
-  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.CukCuk.Web\\MISA.CukCuk.Web.csproj",
+  "projectFilePath": "E:\\dvhai\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.CukCuk.Web\\MISA.CukCuk.Web.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Admin\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\mysqlconnector\\1.3.10\\mysqlconnector.1.3.10.nupkg.sha512",
-    "C:\\Users\\Admin\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
+    "C:\\Users\\dvhai\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
+    "C:\\Users\\dvhai\\.nuget\\packages\\mysqlconnector\\1.3.10\\mysqlconnector.1.3.10.nupkg.sha512",
+    "C:\\Users\\dvhai\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }
