@@ -1,0 +1,9 @@
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\bin\Debug\netcoreapp3.1\MISA.Entities.deps.json
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\bin\Debug\netcoreapp3.1\MISA.Entities.dll
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\bin\Debug\netcoreapp3.1\MISA.Entities.pdb
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\obj\Debug\netcoreapp3.1\MISA.Entities.csproj.AssemblyReference.cache
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\obj\Debug\netcoreapp3.1\MISA.Entities.AssemblyInfoInputs.cache
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\obj\Debug\netcoreapp3.1\MISA.Entities.AssemblyInfo.cs
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\obj\Debug\netcoreapp3.1\MISA.Entities.csproj.CoreCompileInputs.cache
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\obj\Debug\netcoreapp3.1\MISA.Entities.dll
+E:\dvhai\MISA.CukCuk - Copy\misa-cukcuk\MISA.CukCuk\MISA.Entities\obj\Debug\netcoreapp3.1\MISA.Entities.pdb

@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using MISA.ApplicationCore;
+using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interfaces;
 using MISA.Infarstructure;
 using System;

@@ -6,10 +6,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using MySqlConnector;
-using MISA.Infarstructure.Models;
 using System.Data;
 using MISA.ApplicationCore;
 using MISA.ApplicationCore.Interfaces;
+using MISA.ApplicationCore.Entities;
 
 namespace MISA.CukCuk.Web.Controllers
 {
@@ -35,7 +35,7 @@ namespace MISA.CukCuk.Web.Controllers
         {
             var customers = _customerService.GetCustomers();
 
-            return Created("Add",customers);
+            return Ok(customers);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace MISA.CukCuk.Web.Controllers
         {
             var serviceResult = _customerService.InsertCustomer(customer);
 
-            return Ok(serviceResult);
+            return Created("add", serviceResult);
         }
 
         /// <summary>
@@ -75,10 +75,11 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// CreateedBy: DVHAI 24/06/2021
-        [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] string value)
+        [HttpPut("{customerId}")]
+        public IActionResult Put([FromRoute] Guid customerId, [FromBody] Customer customer)
         {
-            return Ok();
+            var serviceResult = _customerService.UpdateCustomer(customerId, customer);
+            return Ok(serviceResult);
         }
 
         // DELETE api/<CustomersController>/5

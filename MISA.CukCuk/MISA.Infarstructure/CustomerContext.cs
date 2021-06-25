@@ -1,4 +1,4 @@
-﻿using MISA.Infarstructure.Models;
+﻿using MISA.ApplicationCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -116,6 +116,8 @@ namespace MISA.Infarstructure
         /// CreatedBy: DVHAI (24/06/2021)
         public int UpdateCustomer(Guid customerId, Customer customer)
         {
+            customer.CustomerId = customerId;
+
             var properties = customer.GetType().GetProperties();
             var parameters = new DynamicParameters();
             foreach (var property in properties)
@@ -137,10 +139,11 @@ namespace MISA.Infarstructure
                                    "Password=12345678;" +
                                    "Database=MISACukCuk_Demo;" +
                                    "Character Set=utf8";
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
-            dbConnection.Execute("Proc_UpdateCustomer", param: parameters, commandType: CommandType.StoredProcedure);
 
-            return 1;
+            IDbConnection dbConnection = new MySqlConnection(connectionString);
+            int rowAffects = dbConnection.Execute("Proc_UpdateCustomer", param: parameters, commandType: CommandType.StoredProcedure);
+
+            return rowAffects;
         }
         #endregion
     }
