@@ -35,7 +35,7 @@ namespace MISA.CukCuk.Web.Controllers
         {
             var customers = _customerService.GetCustomers();
 
-            return Ok(customers);
+            return Created("Add",customers);
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpPost]
         public IActionResult Post([FromBody] Customer customer)
         {
-            var rowAffects = _customerService.InsertCustomer(customer);
+            var serviceResult = _customerService.InsertCustomer(customer);
 
-            return Ok();
+            return Ok(serviceResult);
         }
 
         /// <summary>

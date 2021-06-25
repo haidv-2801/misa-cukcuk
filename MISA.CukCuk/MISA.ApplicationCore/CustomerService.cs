@@ -12,10 +12,12 @@ namespace MISA.ApplicationCore
     {
         ICustomerRepository _customerRepository;
 
+        #region Constructer
         public CustomerService(ICustomerRepository customerRepository)
         {
             _customerRepository = customerRepository;
         }
+        #endregion
 
         #region Method
         /// <summary>
@@ -48,7 +50,19 @@ namespace MISA.ApplicationCore
         /// CreatedBy: DVHAI (24/06/2021)
         public ServiceResult InsertCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            var serviceResult = new ServiceResult();
+            var rowAffects = _customerRepository.InsertCustomer(customer);
+            
+            //Validate dữ liệu
+
+            if(rowAffects > 0)
+            {
+                serviceResult.Messasge = "Thêm khách hàng thành công";
+                serviceResult.MISACode = 100;
+                serviceResult.Data = rowAffects;
+            }
+
+            return serviceResult;
         }
 
         public Customer GetCustomerById(Guid customerId)

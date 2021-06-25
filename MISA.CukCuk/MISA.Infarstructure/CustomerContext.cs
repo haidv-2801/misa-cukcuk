@@ -68,7 +68,7 @@ namespace MISA.Infarstructure
                                    "Character Set=utf8";
             IDbConnection dbConnection = new MySqlConnection(connectionString);
             var customer = dbConnection.Query<Customer>("Proc_GetCustomerById", new { CustomerId = customerId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
-            
+
             return customer;
         }
 
@@ -105,6 +105,42 @@ namespace MISA.Infarstructure
             var rowAffects = dbConnection.Execute("Proc_InsertCustomer", parameters, commandType: CommandType.StoredProcedure);
 
             return rowAffects;
+        }
+
+        /// <summary>
+        /// Sửa khách hàng
+        /// </summary>
+        /// <param name="customerId">Id nhân viên</param>
+        /// <param name="customer">Thông tin khách hàng đã sửa</param>
+        /// <returns></returns>
+        /// CreatedBy: DVHAI (24/06/2021)
+        public int UpdateCustomer(Guid customerId, Customer customer)
+        {
+            var properties = customer.GetType().GetProperties();
+            var parameters = new DynamicParameters();
+            foreach (var property in properties)
+            {
+                var propertyName = property.Name;
+                var propertyValue = property.GetValue(customer);
+                var propertyType = property.PropertyType;
+
+                if (propertyType == typeof(Guid) || propertyType == typeof(Guid?))
+                    parameters.Add($"@{propertyName}", propertyValue, DbType.String);
+                else
+                    parameters.Add($"@{propertyName}", propertyValue);
+            }
+
+            // Kết nối tới CSDL:
+            var connectionString = "User Id=dev;" +
+                                   "Host=47.241.69.179;" +
+                                   "Port=3306;" +
+                                   "Password=12345678;" +
+                                   "Database=MISACukCuk_Demo;" +
+                                   "Character Set=utf8";
+            IDbConnection dbConnection = new MySqlConnection(connectionString);
+            dbConnection.Execute("Proc_UpdateCustomer", param: parameters, commandType: CommandType.StoredProcedure);
+
+            return 1;
         }
         #endregion
     }

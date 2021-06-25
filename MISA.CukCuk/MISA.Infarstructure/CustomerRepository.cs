@@ -36,7 +36,9 @@ namespace MISA.Infarstructure
 
         public int InsertCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            var customerContext = new CustomerContext();
+            var rowAffects = customerContext.InsertCustomer(customer);
+            return rowAffects;
         }
 
         public int UpdateCustomer(Customer customer)
