@@ -84,7 +84,11 @@ namespace MISA.ApplicationCore
 
         public ServiceResult DeleteCustomer(Guid customerId)
         {
-            throw new NotImplementedException();
+            var serviceResult = new ServiceResult();
+
+            serviceResult.Data = _customerRepository.DeleteCustomer(customerId);
+
+            return serviceResult;
         }
         #endregion
     }

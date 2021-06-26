@@ -10,6 +10,7 @@ using MISA.ApplicationCore;
 using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interfaces;
 using MISA.Infarstructure;
+using MISA.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,8 +32,13 @@ namespace MISA.CukCuk.Web
         {
             services.AddControllers();
 
+            //customer
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
+
+            //employee
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeService, EmployeeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

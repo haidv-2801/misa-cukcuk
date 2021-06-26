@@ -10,9 +10,9 @@ using System.Linq;
 using Microsoft.Extensions.Configuration;
 using static Dapper.SqlMapper;
 
-namespace MISA.Infarstructure
+namespace MISA.Infrastructure
 {
-    public class CustomerRepository : ICustomerRepository
+    public class EmployeeRepository : IEmployeeRepository
     {
         #region Declare
         IConfiguration _configuration;
@@ -20,8 +20,8 @@ namespace MISA.Infarstructure
         IDbConnection _dbConnection = null;
         #endregion
 
-        #region Constructer
-        public CustomerRepository(IConfiguration configuration)
+        #region
+        public EmployeeRepository(IConfiguration configuration)
         {
             _configuration = configuration;
             _connectionString = _configuration.GetConnectionString("MISACukCukConnectionString");
@@ -31,63 +31,63 @@ namespace MISA.Infarstructure
         #endregion
 
         #region Methods
-        public IEnumerable<Customer> GetCustomers()
+        public IEnumerable<Employee> GetEmployees()
         {
             //1. Tạo kết nối và truy vấn
-            var customers = _dbConnection.Query<Customer>("Proc_GetCustomers", commandType: CommandType.StoredProcedure).ToList();
+            var Employees = _dbConnection.Query<Employee>("Proc_GetEmployees", commandType: CommandType.StoredProcedure).ToList();
 
             //2. Trả về dữ liệu
-            return customers;
+            return Employees;
         }
 
-        public Customer GetCustomerByCode(string customerCode)
+        public Employee GetEmployeeByCode(string EmployeeCode)
         {
             //1. Tạo kết nối và truy vấn
-            var customer = _dbConnection.Query<Customer>("Proc_GetCustomerByCode", new { CustomerCode = customerCode }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var Employee = _dbConnection.Query<Employee>("Proc_GetEmployeeByCode", new { EmployeeCode = EmployeeCode }, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
             //2. Trả về dữ liệu
-            return customer;
+            return Employee;
         }
 
-        public Customer GetCustomerById(Guid customerId)
+        public Employee GetEmployeeById(Guid EmployeeId)
         {
             //1. Tạo kết nối và truy vấn
-            var customer = _dbConnection.Query<Customer>("Proc_GetCustomerById", new { CustomerId = customerId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var Employee = _dbConnection.Query<Employee>("Proc_GetEmployeeById", new { EmployeeId = EmployeeId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
             //2. Trả về dữ liệu
-            return customer;
+            return Employee;
         }
 
-        public int InsertCustomer(Customer customer)
+        public int InsertEmployee(Employee Employee)
         {
-            //1. Duyệt các thuộc tính trên customer và tạo parameters
-            var parameters = MappingDbType<Customer>(customer);
+            //1. Duyệt các thuộc tính trên Employee và tạo parameters
+            var parameters = MappingDbType<Employee>(Employee);
 
             //2. Kết nối tới CSDL:
-            var rowAffects = _dbConnection.Execute("Proc_InsertCustomer", parameters, commandType: CommandType.StoredProcedure);
+            var rowAffects = _dbConnection.Execute("Proc_InsertEmployee", parameters, commandType: CommandType.StoredProcedure);
 
             //3. Trả về dữ liệu
             return rowAffects;
         }
 
-        public int UpdateCustomer(Guid customerId, Customer customer)
+        public int UpdateEmployee(Guid EmployeeId, Employee Employee)
         {
-            customer.CustomerId = customerId;
+            Employee.EmployeeId = EmployeeId;
 
-            //1. Duyệt các thuộc tính trên customer và tạo parameters
-            var parameters = MappingDbType<Customer>(customer);
+            //1. Duyệt các thuộc tính trên Employee và tạo parameters
+            var parameters = MappingDbType<Employee>(Employee);
 
             //2. Kết nối tới CSDL:
-            int rowAffects = _dbConnection.Execute("Proc_UpdateCustomer", param: parameters, commandType: CommandType.StoredProcedure);
+            int rowAffects = _dbConnection.Execute("Proc_UpdateEmployee", param: parameters, commandType: CommandType.StoredProcedure);
 
             //3. Trả về dữ liệu
             return rowAffects;
         }
 
-        public int DeleteCustomer(Guid customerId)
+        public int DeleteEmployee(Guid EmployeeId)
         {
             //1. Kết nối tới CSDL:
-            int rowAffects = _dbConnection.Execute("Proc_DeleteCustomerById", param: new { CustomerId = customerId }, commandType: CommandType.StoredProcedure);
+            int rowAffects = _dbConnection.Execute("Proc_DeleteEmployeeById", param: new { EmployeeId = EmployeeId }, commandType: CommandType.StoredProcedure);
 
             //2. Trả về số bản ghi bị ảnh hưởng
             return rowAffects;

@@ -6,11 +6,11 @@ namespace MISA.ApplicationCore.Entities
 {
     // <summary>
     /// Khách hàng
-    /// DVHAI 24/06/2021
     /// </summary>
+    /// CreatedBy: DVHAI (24/06/2021)
     public class Customer
     {
-        #region property
+        #region Property
         /// <summary>
         /// Khóa chính
         /// </summary>

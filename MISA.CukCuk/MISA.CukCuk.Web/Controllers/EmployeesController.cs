@@ -13,16 +13,16 @@ using MISA.ApplicationCore.Entities;
 
 namespace MISA.CukCuk.Web.Controllers
 {
-    [Route("/v1/customers")]
+    [Route("/v1/employees")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class EmployeesController : ControllerBase
     {
 
-        ICustomerService _customerService;
+        IEmployeeService _employeeService;
 
-        public CustomersController(ICustomerService customerService)
+        public EmployeesController(IEmployeeService employeeService)
         {
-            _customerService = customerService;
+            _employeeService = employeeService;
         }
 
         /// <summary>
@@ -33,9 +33,9 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var customers = _customerService.GetCustomers();
+            var employees = _employeeService.GetEmployees();
 
-            return Ok(customers);
+            return Ok(employees);
         }
 
         /// <summary>
@@ -44,27 +44,27 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="id">id của khách hàng</param>
         /// <returns>Một khách hàng tìm được theo id</returns>
         /// CreateedBy: DVHAI 24/06/2021
-        [HttpGet("{customerCode}")]
-        public IActionResult Get(string customerCode)
+        [HttpGet("{employeeCode}")]
+        public IActionResult Get(string employeeCode)
         {
-            var customer = _customerService.GetCustomerByCode(customerCode);
+            var employee = _employeeService.GetEmployeeByCode(employeeCode);
 
-            if (customer == null)
+            if (employee == null)
                 return NotFound();
 
-            return Ok(customer);
+            return Ok(employee);
         }
 
         /// <summary>
         /// Thêm một nhân viên mới
         /// </summary>
-        /// <param name="customer"></param>
+        /// <param name="employee"></param>
         /// <returns></returns>
         /// CreateedBy: DVHAI 24/06/2021
         [HttpPost]
-        public IActionResult Post([FromBody] Customer customer)
+        public IActionResult Post([FromBody] Employee employee)
         {
-            var serviceResult = _customerService.InsertCustomer(customer);
+            var serviceResult = _employeeService.InsertEmployee(employee);
 
             return Created("add", serviceResult);
         }
@@ -75,18 +75,18 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         /// CreateedBy: DVHAI 24/06/2021
-        [HttpPut("{customerId}")]
-        public IActionResult Put([FromRoute] Guid customerId, [FromBody] Customer customer)
+        [HttpPut("{employeeId}")]
+        public IActionResult Put([FromRoute] Guid employeeId, [FromBody] Employee employee)
         {
-            var serviceResult = _customerService.UpdateCustomer(customerId, customer);
+            var serviceResult = _employeeService.UpdateEmployee(employeeId, employee);
             return Ok(serviceResult);
         }
 
-        // DELETE api/<CustomersController>/5
+        // DELETE api/<employeesController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
-            var res = _customerService.DeleteCustomer(id);
+            var res = _employeeService.DeleteEmployee(id);
             return Ok(res);
         }
     }

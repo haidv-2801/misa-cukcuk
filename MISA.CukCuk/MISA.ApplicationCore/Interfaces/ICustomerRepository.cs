@@ -38,20 +38,20 @@ namespace MISA.ApplicationCore.Entities
         /// Thêm khách hàng
         /// </summary>
         /// <param name="customer">Thông tin khách hàng</param>
-        /// <returns></returns>
+        /// <returns>Số bản ghi</returns>
         int InsertCustomer(Customer customer);
 
         /// <summary>
-        /// 
+        /// Cập nhập thông tin bản ghi
         /// </summary>
         /// <param name="customerId">Id khách hàng</param>
         /// <param name="customer">Thông tin khách hàng</param>
-        /// <returns></returns>
+        /// <returns>Số bản ghi bị ảnh hưởng</returns>
         /// DVHAI (25/06/2021)
         int UpdateCustomer(Guid customerId, Customer customer);
 
         /// <summary>
-        /// 
+        /// Xóa bản ghi
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
