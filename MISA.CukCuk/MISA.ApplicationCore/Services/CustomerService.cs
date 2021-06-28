@@ -1,7 +1,5 @@
 ﻿using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interfaces;
-using MISA.Infarstructure;
-using MISA.Infarstructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -58,7 +56,7 @@ namespace MISA.ApplicationCore
             if(rowAffects > 0)
             {
                 serviceResult.Messasge = "Thêm khách hàng thành công";
-                serviceResult.MISACode = 100;
+                serviceResult.MISACode = MISACode.Success;
                 serviceResult.Data = rowAffects;
             }
 
@@ -67,17 +65,30 @@ namespace MISA.ApplicationCore
 
         public Customer GetCustomerById(Guid customerId)
         {
-            throw new NotImplementedException();
+            var customer = _customerRepository.GetCustomerById(customerId);
+            return customer;
         }
 
-        public ServiceResult UpdateCustomer(Customer customer)
+        public ServiceResult UpdateCustomer(Guid customerId, Customer customer)
         {
-            throw new NotImplementedException();
+            var serviceResult = new ServiceResult();
+            var rowAffects = _customerRepository.UpdateCustomer(customerId, customer);
+            if(rowAffects > 0)
+            {
+                serviceResult.Messasge = "Sửa khách hàng thành công";
+                serviceResult.MISACode = MISACode.Success;
+                serviceResult.Data = customer;
+            }
+            return serviceResult;
         }
 
         public ServiceResult DeleteCustomer(Guid customerId)
         {
-            throw new NotImplementedException();
+            var serviceResult = new ServiceResult();
+
+            serviceResult.Data = _customerRepository.DeleteCustomer(customerId);
+
+            return serviceResult;
         }
         #endregion
     }

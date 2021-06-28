@@ -1,5 +1,4 @@
 ﻿using MISA.ApplicationCore.Entities;
-using MISA.Infarstructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,7 +15,7 @@ namespace MISA.ApplicationCore.Interfaces
 
         ServiceResult InsertCustomer(Customer customer);
 
-        ServiceResult UpdateCustomer(Customer customer);
+        ServiceResult UpdateCustomer(Guid customerId, Customer customer);
 
         ServiceResult DeleteCustomer(Guid customerId);
     }

@@ -1,10 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "aA9MQYbXj6HoWgMh1j6xdgMOsIW9vmDS5wFIXvMZaOgEiMISflGIunNlS/51iM+hR8r02by4NONCPDIe4HnCOA==",
+  "dgSpecHash": "Xv62D/rbWoFtldJYT0y23rTAl1Va33CzyUbmi7X9arTZIq1Glop6GZYsVPqXLLmnJMHVQ3rk9N9eJ+L5IeqRjw==",
   "success": true,
-  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infarstructure.csproj",
+  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\mysqlconnector\\1.3.10\\mysqlconnector.1.3.10.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\system.reflection.emit.lightweight\\4.7.0\\system.reflection.emit.lightweight.4.7.0.nupkg.sha512"
   ],

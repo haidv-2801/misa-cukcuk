@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.CukCuk.Web", "MISA.CukCuk.Web\MISA.CukCuk.Web.csproj", "{7C6B6508-F140-4E30-9C92-2087740DEB45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MISA.ApplicationCore", "MISA.ApplicationCore\MISA.ApplicationCore.csproj", "{05263D0B-7171-4619-A554-C7F47BD48165}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.ApplicationCore", "MISA.ApplicationCore\MISA.ApplicationCore.csproj", "{05263D0B-7171-4619-A554-C7F47BD48165}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MISA.Infarstructure", "MISA.Infarstructure\MISA.Infarstructure.csproj", "{41BEC50C-4610-44D3-AE19-9C650B66C335}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MISA.Infrastructure", "MISA.Infarstructure\MISA.Infrastructure.csproj", "{41BEC50C-4610-44D3-AE19-9C650B66C335}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
