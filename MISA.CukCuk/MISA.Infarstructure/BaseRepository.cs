@@ -34,19 +34,22 @@ namespace MISA.ApplicationCore.Interfaces
         #region Methods
         public IEnumerable<TEntity> GetEntities()
         {
-            //1. Tạo kết nối và truy vấn
+            //1. Tạo kết nối và truy vấn                        
             var entities = _dbConnection.Query<TEntity>($"Proc_Get{_tableName}s", commandType: CommandType.StoredProcedure).ToList();
 
             //2. Trả về dữ liệu
-            return entities;
+            return entities;                                                                                                    
         }
         public TEntity GetEntityById(Guid entityId)
         {
             //1. Lấy tên của khóa chính
             var keyName = GetKeyProperty().Name;
 
+            var dynamicParams = new DynamicParameters();
+            dynamicParams.Add($"@{keyName}", entityId);
+
             //2. Tạo kết nối và truy vấn
-            var entity = _dbConnection.Query<TEntity>($"Proc_Get{_tableName}ById", new { employeeId = entityId }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+            var entity = _dbConnection.Query<TEntity>($"Proc_Get{_tableName}ById", param: dynamicParams, commandType: CommandType.StoredProcedure).FirstOrDefault();
             
             //3. Trả về dữ liệu
             return entity;
@@ -63,8 +66,15 @@ namespace MISA.ApplicationCore.Interfaces
 
         public int Delete(Guid entityId)
         {
-            //1. Kết nối tới CSDL:
-            int rowAffects = _dbConnection.Execute($"Proc_Delete{_tableName}ById", param: new { CustomerId = entityId }, commandType: CommandType.StoredProcedure);
+
+            //1. Lấy tên của khóa chính
+            var keyName = GetKeyProperty().Name;
+
+            var dynamicParams = new DynamicParameters();
+            dynamicParams.Add($"@{keyName}", entityId);
+            
+            //2. Kết nối tới CSDL:
+            int rowAffects = _dbConnection.Execute($"Proc_Delete{_tableName}ById", param: dynamicParams, commandType: CommandType.StoredProcedure);
 
             //2. Trả về số bản ghi bị ảnh hưởng
             return rowAffects;
@@ -78,7 +88,7 @@ namespace MISA.ApplicationCore.Interfaces
             var parameters = MappingDbType(entity);
 
             //2. Kết nối tới CSDL:
-            var rowAffects = _dbConnection.Execute($"Proc_Insert{entity}", parameters, commandType: CommandType.StoredProcedure);
+            var rowAffects = _dbConnection.Execute($"Proc_Insert{_tableName}", parameters, commandType: CommandType.StoredProcedure);
 
             //3. Trả về dữ liệu
             return rowAffects;
@@ -86,15 +96,17 @@ namespace MISA.ApplicationCore.Interfaces
 
         public int Update(Guid entityId, TEntity entity)
         {
-            //customer.CustomerId = customerId;
-
             //1. Duyệt các thuộc tính trên customer và tạo parameters
             var parameters = MappingDbType(entity);
 
-            //2. Kết nối tới CSDL:
-            int rowAffects = _dbConnection.Execute($"Proc_Update{entity}", param: parameters, commandType: CommandType.StoredProcedure);
+            //2. Ánh xạ giá trị id
+            var keyName = GetKeyProperty().Name;
+            entity.GetType().GetProperty(keyName).SetValue(entity, entityId);
 
-            //3. Trả về dữ liệu
+            //3. Kết nối tới CSDL:
+            int rowAffects = _dbConnection.Execute($"Proc_Update{_tableName}", param: parameters, commandType: CommandType.StoredProcedure);
+
+            //4. Trả về dữ liệu
             return rowAffects;
         }
 

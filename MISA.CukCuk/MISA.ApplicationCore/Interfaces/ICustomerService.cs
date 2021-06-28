@@ -5,18 +5,23 @@ using System.Text;
 
 namespace MISA.ApplicationCore.Interfaces
 {
-    public interface ICustomerService
+    public interface ICustomerService: IBaseService<Customer>
     {
-        IEnumerable<Customer> GetCustomers();
+        /// <summary>
+        /// Lấy dữ liệu phân trang
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <returns>Danh sách khách hàng phân trang</returns>
+        /// CREATED BY: DVHAI (28/06/2021)
+        IEnumerable<Customer> GetCustomerPaging(int limit, int offset);
 
-        Customer GetCustomerById(Guid customerId);
-
-        Customer GetCustomerByCode(string customerCode);
-
-        ServiceResult InsertCustomer(Customer customer);
-
-        ServiceResult UpdateCustomer(Guid customerId, Customer customer);
-
-        ServiceResult DeleteCustomer(Guid customerId);
+        /// <summary>
+        /// Lấy danh sách khách hàng theo nhóm
+        /// </summary>
+        /// <param name="groupId">Id nhóm khách hàng</param>
+        /// <returns>Danh sách khách hàng theo nhóm</returns>
+        /// CREATED BY: DVHAI (28/06/2021)
+        IEnumerable<Customer> GetCustomerByGroup(Guid groupId);
     }
 }

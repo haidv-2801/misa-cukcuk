@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MISA.Infrastructure
+namespace MISA.ApplicationCore
 {
     public class BaseService<TEntity> : IBaseService<TEntity>
     {

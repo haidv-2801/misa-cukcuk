@@ -5,18 +5,16 @@ using System.Text;
 
 namespace MISA.ApplicationCore.Interfaces
 {
-    public interface IEmployeeService
+    public interface IEmployeeService : IBaseService<Employee>
     {
-        IEnumerable<Employee> GetEmployees();
 
-        Employee GetEmployeeById(Guid employeeId);
-
-        Employee GetEmployeeByCode(string employeeCode);
-
-        ServiceResult InsertEmployee(Employee employee);
-
-        ServiceResult UpdateEmployee(Guid employeeId, Employee employee);
-
-        ServiceResult DeleteEmployee(Guid employeeId);
+        /// <summary>
+        /// Danh sách nhân viên phân trang
+        /// </summary>
+        /// <param name="limit"></param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        /// CREATED BY: DVHAI (28/06/2021)
+        public IEnumerable<Employee> GetEmployeesPaging(int limit, int offset);
     }
 }
