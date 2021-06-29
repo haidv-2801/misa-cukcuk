@@ -20,11 +20,9 @@ namespace MISA.ApplicationCore
         #endregion
 
         #region Method
-        public override int Insert(Customer customer)
+        public override ServiceResult Insert(Customer customer)
         {
-            var res = base.Insert(customer);
-
-            return res;
+            return base.Insert(customer);
         }
         public IEnumerable<Customer> GetCustomerPaging(int limit, int offset)
         {

@@ -71,8 +71,6 @@ namespace MISA.ApplicationCore.Interfaces
             return rowAffects;
         }
 
-
-
         public int Insert(TEntity entity)
         {
             //1. Duyệt các thuộc tính trên bản ghi và tạo parameters
@@ -139,6 +137,25 @@ namespace MISA.ApplicationCore.Interfaces
             var entity = _dbConnection.Query<TEntity>(query, commandType: CommandType.Text).FirstOrDefault();
             return entity;
         }
+
+        public int DynamicDelete(TEntity entity)
+        {
+            var dynamicParams = MappingDbType(entity);
+
+            string procName = buildStoreProcedure();   
+
+            //2. Kết nối tới CSDL:
+            int rowAffects = _dbConnection.Execute($"{procName}", param: dynamicParams, commandType: CommandType.StoredProcedure);
+
+            //2. Trả về số bản ghi bị ảnh hưởng
+            return rowAffects;
+        }
+
+        protected virtual string buildStoreProcedure()
+        {
+            return $"Proc_Delete{_tableName}ById";
+        }
+
         #endregion
     }
 }

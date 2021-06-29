@@ -1,6 +1,10 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using MISA.ApplicationCore.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Interfaces
 {
@@ -22,20 +26,12 @@ namespace MISA.ApplicationCore.Interfaces
         /// DVHAI (25/06/2021)
         TEntity GetEntityById(Guid entityId);
 
-        ///// <summary>
-        /////  Lấy bản ghi viên theo mã
-        ///// </summary>
-        ///// <param name="entityCode">Mã bản ghi</param>
-        ///// <returns>Bản ghi thông tin 1 bản ghi</returns>
-        ///// DVHAI (25/06/2021)
-        //TEntity GetEntityByCode(string entityCode);
-
         /// <summary>
         /// Thêm bản ghi
         /// </summary>
         /// <param name="entity">Thông tin bản ghi</param>
         /// <returns>Số bản ghi</returns>
-        int Insert(TEntity entity);
+        ServiceResult Insert(TEntity entity);
 
         /// <summary>
         /// Cập nhập thông tin bản ghi
@@ -44,7 +40,7 @@ namespace MISA.ApplicationCore.Interfaces
         /// <param name="entity">Thông tin bản ghi</param>
         /// <returns>Số bản ghi bị ảnh hưởng</returns>
         /// DVHAI (25/06/2021)
-        int Update(Guid entityId, TEntity entity);
+        ServiceResult Update(Guid entityId, TEntity entity);
 
         /// <summary>
         /// Xóa bản ghi
@@ -52,6 +48,14 @@ namespace MISA.ApplicationCore.Interfaces
         /// <param name="entityId"></param>
         /// <returns></returns>
         /// DVHAI (25/06/2021)
-        int Delete(Guid entityId);
+        ServiceResult Delete(Guid entityId);
+
+        /// <summary>
+        /// Đọc file excel
+        /// </summary>
+        /// <param name="formFile"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<ServiceResult> readExcelFile(IFormFile formFile, CancellationToken cancellationToken);
     }
 }

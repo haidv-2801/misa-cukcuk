@@ -32,6 +32,8 @@ namespace MISA.CukCuk.Web
         {
             services.AddControllers();
 
+            services.AddSwaggerGen();
+
             //base
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
             services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
@@ -58,6 +60,15 @@ namespace MISA.CukCuk.Web
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseEndpoints(endpoints =>
             {

@@ -18,7 +18,7 @@ namespace MISA.ApplicationCore.Interfaces
         ///  Lấy bản ghi theo id
         /// </summary>
         /// <param name="entityId">Id của bản ghi</param>
-        /// <returns>Bản ghi thông tin 1 bản ghi</returns>
+        /// <returns>Bản ghi thông tin 1 bản ghi</return
         /// DVHAI (25/06/2021)
         TEntity GetEntityById(Guid entityId);
 

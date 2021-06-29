@@ -5,6 +5,7 @@ using MISA.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MISA.CukCuk.Web.Controllers
@@ -60,7 +61,7 @@ namespace MISA.CukCuk.Web.Controllers
         public IActionResult Post([FromBody] TEntity entity)
         {
             var serviceResult = _baseService.Insert(entity);
-            if (serviceResult == -1)
+            if ((int)serviceResult.Data == -1)
                 return BadRequest();
 
             return Created("add", serviceResult);
@@ -91,6 +92,13 @@ namespace MISA.CukCuk.Web.Controllers
         {
             var rowAffects = _baseService.Delete(Guid.Parse(id));
             return Ok(rowAffects);
+        }
+
+
+        [HttpPost("import")]
+        public IActionResult Import(IFormFile formFile, CancellationToken cancellationToken)
+        {
+            return Ok(_baseService.readExcelFile(formFile, cancellationToken));
         }
     }
 }
