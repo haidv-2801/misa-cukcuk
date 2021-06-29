@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
 
 namespace MISA.ApplicationCore.Interfaces
@@ -52,5 +53,12 @@ namespace MISA.ApplicationCore.Interfaces
         /// <returns></returns>
         /// DVHAI (25/06/2021)
         int Delete(Guid entityId);
+
+        /// <summary>
+        /// Lấy thực thể theo thuộc tính
+        /// </summary>
+        /// <param name="propertyInfo"></param>
+        /// <returns>Bản ghi thực thể</returns>
+        TEntity GetEntityByProperty(string propertyName, object propertyValue);
     }
 }

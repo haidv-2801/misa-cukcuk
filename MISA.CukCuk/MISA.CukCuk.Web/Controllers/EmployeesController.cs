@@ -16,13 +16,13 @@ namespace MISA.CukCuk.Web.Controllers
     public class EmployeesController : BaseEntityController<Employee>
     {
         #region Declare
-        IBaseService<Employee> _baseService;
+        IEmployeeService _employeeService;
         #endregion
 
         #region Methods
-        public EmployeesController(IBaseService<Employee> baseService) : base(baseService)
+        public EmployeesController(IEmployeeService employeeService) : base(employeeService)
         {
-            _baseService = baseService;
+            _employeeService = employeeService;
         }
         #endregion
     }

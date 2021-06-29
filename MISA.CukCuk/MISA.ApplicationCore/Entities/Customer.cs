@@ -21,6 +21,8 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Mã khách hàng
         /// </summary>
+        [IRequired]
+        [CheckDuplicate]
         public string CustomerCode { get; set; }
 
         /// <summary>
@@ -41,6 +43,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Số điện thoại
         /// </summary>
+        [CheckDuplicate]
         public string PhoneNumber { get; set; }
 
         /// <summary>

@@ -16,9 +16,9 @@ namespace MISA.ApplicationCore.Interfaces
     {
         #region Declare
         IConfiguration _configuration;
-        IDbConnection _dbConnection = null;
+        protected IDbConnection _dbConnection = null;
         string _connectionString = string.Empty;
-        string _tableName;
+        protected string _tableName;
         #endregion
 
         #region Constructer
@@ -54,15 +54,6 @@ namespace MISA.ApplicationCore.Interfaces
             //3. Trả về dữ liệu
             return entity;
         }
-
-        //public TEntity GetEntityByCode(string entityCode)
-        //{
-        //    //1. Tạo kết nối và truy vấn
-        //    var entity = _dbConnection.Query<TEntity>($"Proc_Get{_tableName}ById", new { customerId = entityCode }, commandType: CommandType.StoredProcedure).FirstOrDefault();
-
-        //    //2. Trả về dữ liệu
-        //    return entity;
-        //}
 
         public int Delete(Guid entityId)
         {
@@ -140,6 +131,13 @@ namespace MISA.ApplicationCore.Interfaces
                 .FirstOrDefault();
             
             return keyProperty;
+        }
+
+        public TEntity GetEntityByProperty(string propertyName, object propertyValue)
+        {
+            string query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
+            var entity = _dbConnection.Query<TEntity>(query, commandType: CommandType.Text).FirstOrDefault();
+            return entity;
         }
         #endregion
     }

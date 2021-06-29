@@ -60,6 +60,8 @@ namespace MISA.CukCuk.Web.Controllers
         public IActionResult Post([FromBody] TEntity entity)
         {
             var serviceResult = _baseService.Insert(entity);
+            if (serviceResult == -1)
+                return BadRequest();
 
             return Created("add", serviceResult);
         }

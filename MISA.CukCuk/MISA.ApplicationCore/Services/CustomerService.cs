@@ -8,16 +8,24 @@ namespace MISA.ApplicationCore
 {
     public class CustomerService : BaseService<Customer>, ICustomerService
     {
-        IBaseRepository<Customer> _customerRepository;
+        #region Declare
+        ICustomerRepository _customerRepository;
+        #endregion
 
         #region Constructer
-        public CustomerService(IBaseRepository<Customer> customerRepository):base(customerRepository)
+        public CustomerService(ICustomerRepository customerRepository) : base(customerRepository)
         {
             _customerRepository = customerRepository;
         }
         #endregion
 
         #region Method
+        public override int Insert(Customer customer)
+        {
+            var res = base.Insert(customer);
+
+            return res;
+        }
         public IEnumerable<Customer> GetCustomerPaging(int limit, int offset)
         {
             throw new NotImplementedException();
