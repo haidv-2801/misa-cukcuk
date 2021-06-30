@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Dynamic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,7 +28,7 @@ namespace MISA.ApplicationCore
         public BaseService(IBaseRepository<TEntity> baseRepository)
         {
             _baseRepository = baseRepository;
-            
+
             _serviceResult = new ServiceResult();
 
             if (_errors == null)
@@ -56,8 +57,6 @@ namespace MISA.ApplicationCore
             {
                 _serviceResult.Data = _baseRepository.Insert(entity);
                 _serviceResult.MISACode = MISACode.Valid;
-                _errors.Clear();
-                _errors.Add("Hợp lệ");
             }
             else
             {
@@ -82,7 +81,7 @@ namespace MISA.ApplicationCore
             return serviceResult;
         }
 
-        private bool Validate(TEntity entity, List<TEntity> resources = null)
+        private bool Validate(TEntity entity)
         {
             var isValid = true;
 
@@ -94,60 +93,71 @@ namespace MISA.ApplicationCore
                 var propertyValue = property.GetValue(entity);
 
                 //1.1 Kiểm tra xem  có attribute cần phải validate không
-                if (property.IsDefined(typeof(IRequired), false))
+                if (isValid && property.IsDefined(typeof(IRequired), false))
                 {
                     //1.1.1 Check bắt buộc nhập
                     if (propertyValue == null)
-                        isValid = validateRequired(propertyName, propertyValue, resources);
+                        isValid = validateRequired(entity, property);
                 }
 
-                if (property.IsDefined(typeof(CheckDuplicate), false))
+                if (isValid && property.IsDefined(typeof(IDuplicate), false))
                 {
                     //1.1.2 Check trùng
-                    isValid = validateDuplicate(entity, propertyName, propertyValue, resources);
+                    isValid = validateDuplicate(entity, property);
                 }
             }
 
             return isValid;
         }
 
-        private bool validateRequired(string propertyName, object propertyValue, List<TEntity> rources = null)
+        private bool validateRequired(TEntity entity, PropertyInfo propertyInfo)
         {
             bool isValid = true;
+
+            var propertyName = propertyInfo.Name;
+            var propertyValue = propertyInfo.GetValue(entity);
+            var propertyDisplayName = getAttributeDisplayName(propertyName);
 
             if (propertyValue == null)
             {
                 isValid = false;
 
-                var columnDisplayName = getAttributeDisplayName(propertyName);
-
                 _serviceResult.MISACode = MISACode.InValid;
                 _serviceResult.Messasge = "Có lỗi xảy ra, vui lòng kiểm tra lại.";
-                _serviceResult.Data = new { devMsg = "Dữ liệu không được trống", userMsg = "Dữ liệu không được trống" };
+                _serviceResult.Data = new { devMsg = $"{propertyDisplayName} không được trống", userMsg = $"{propertyDisplayName} không được trống" };
             }
 
             return isValid;
         }
 
-        private bool validateDuplicate(TEntity entity, string propertyName, object propertyValue, List<TEntity> rources = null)
+        private bool validateDuplicate(TEntity entity, PropertyInfo propertyInfo)
         {
             bool isValid = true;
 
+            var propertyName = propertyInfo.Name;
+            var propertyValue = propertyInfo.GetValue(entity);
+            var propertyDisplayName = getAttributeDisplayName(propertyName);
             var entityDuplicate = _baseRepository.GetEntityByProperty(propertyName, propertyValue);
+
             if (entityDuplicate != null)
             {
                 isValid = false;
 
-                var columnDisplayName = getAttributeDisplayName(propertyName);
-
                 _serviceResult.MISACode = MISACode.InValid;
                 _serviceResult.Messasge = "Có lỗi xảy ra, vui lòng kiểm tra lại.";
-                _serviceResult.Data = new { devMsg = $"{columnDisplayName} bị trùng", userMsg = $"{columnDisplayName} bị trùng" };
+                _serviceResult.Data = new { devMsg = $"{propertyDisplayName} bị trùng", userMsg = $"{propertyDisplayName} bị trùng" };
             }
 
             return isValid;
         }
 
+        /// <summary>
+        /// Đọc file excel
+        /// </summary>
+        /// <param name="formFile"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns>Danh sách các thực thể</returns>
+        /// DVHAI (01/07/2021)
         public async Task<ServiceResult> readExcelFile(IFormFile formFile, CancellationToken cancellationToken)
         {
 
@@ -218,17 +228,6 @@ namespace MISA.ApplicationCore
                         }
                         list.Add(entity);
                     }
-                }
-            }
-
-            //Validate
-            if(list.Count > 0)
-            {
-                var allEntitiesFromDb = _baseRepository.GetEntities();
-                foreach(var item in list)
-                {
-                    Validate(item, list);
-                    Validate(item, allEntitiesFromDb.ToList());
                 }
             }
 

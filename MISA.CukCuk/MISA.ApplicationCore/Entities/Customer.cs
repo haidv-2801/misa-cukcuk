@@ -23,7 +23,7 @@ namespace MISA.ApplicationCore.Entities
         /// Mã khách hàng
         /// </summary>
         [IRequired]
-        [CheckDuplicate]
+        [IDuplicate]
         [Display(Name = "Mã khách hàng")]
         public string CustomerCode { get; set; }
 
@@ -48,7 +48,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Số điện thoại
         /// </summary>
-        [CheckDuplicate]
+        [IDuplicate]
         [Display(Name = "Số điện thoại")]
         public string PhoneNumber { get; set; }
 

@@ -20,10 +20,6 @@ namespace MISA.ApplicationCore
         #endregion
 
         #region Method
-        public override ServiceResult Insert(Customer customer)
-        {
-            return base.Insert(customer);
-        }
         public IEnumerable<Customer> GetCustomerPaging(int limit, int offset)
         {
             throw new NotImplementedException();

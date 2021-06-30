@@ -5324,24 +5324,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\dvhai\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\dvhai\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
+      "projectUniqueName": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
       "projectName": "MISA.Infrastructure",
-      "projectPath": "E:\\dvhai\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
-      "packagesPath": "C:\\Users\\dvhai\\.nuget\\packages\\",
-      "outputPath": "E:\\dvhai\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\obj\\",
+      "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\dvhai\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5355,8 +5350,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "E:\\dvhai\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
-              "projectPath": "E:\\dvhai\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj"
+            "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
+              "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj"
             }
           }
         }
@@ -5399,7 +5394,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

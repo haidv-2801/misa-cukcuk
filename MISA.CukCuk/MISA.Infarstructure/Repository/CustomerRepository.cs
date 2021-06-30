@@ -17,7 +17,6 @@ namespace MISA.Infarstructure
         #region Constructer
         public CustomerRepository(IConfiguration configuration):base(configuration)
         {
-
         }
         #endregion
 

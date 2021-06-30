@@ -11,13 +11,13 @@ namespace MISA.ApplicationCore.Entities
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class CheckDuplicate : Attribute
+    public class IDuplicate : Attribute
     {
 
     }
 
     [AttributeUsage(AttributeTargets.Property)]
-    public class PrimaryKey : Attribute
+    public class IPrimaryKey : Attribute
     {
 
     }
