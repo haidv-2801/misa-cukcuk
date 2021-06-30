@@ -22,14 +22,36 @@ namespace MISA.ApplicationCore.Entities
 
     }
 
-    class BaseEntity
+    public class BaseEntity
     {
+        /// <summary>
+        /// Trạng thái của Entity
+        /// </summary>
+        public EntityState EntityState { get; set; }
+
+        /// <summary>
+        /// Ngày tạo
+        /// </summary>
         public DateTime? CreatedDate { get; set; }
 
+        /// <summary>
+        /// Người tạo
+        /// </summary>
         public string CreatedBy { get; set; }
 
+        /// <summary>
+        /// Ngày sửa
+        /// </summary>
         public DateTime? ModifiedDate { get; set; }
 
+        /// <summary>
+        /// Người sửa
+        /// </summary>
         public string ModifiedBy { get; set; }
+
+        /// <summary>
+        /// Trạng thái insert của entity
+        /// </summary>
+        public IEnumerable<String> Status { get; set; }
     }
 }

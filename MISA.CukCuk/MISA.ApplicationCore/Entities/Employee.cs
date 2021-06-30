@@ -10,7 +10,7 @@ namespace MISA.ApplicationCore.Entities
     /// Danh mục nhân viên
     /// </summary>
     /// CreatedBy: DVHAI (24/06/2021)
-    public class Employee
+    public class Employee : BaseEntity
     {
         #region Property
         /// <summary>
@@ -22,6 +22,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Mã nhân viên
         /// </summary>
+        [CheckDuplicate]
         public string EmployeeCode { get; set; }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// ID phòng ban
         /// </summary>
-        public Guid? DepartmentId{ get; set; }
+        public Guid? DepartmentId { get; set; }
 
         /// <summary>
         /// Tên giới tính
@@ -93,26 +94,6 @@ namespace MISA.ApplicationCore.Entities
         /// Tên tình trạng công việc
         /// </summary>
         public string WorkStatusName { get; set; }
-
-        /// <summary>
-        /// Ngày tạo
-        /// </summary>
-        public DateTime? CreatedDate { get; set; }
-
-        /// <summary>
-        /// Người tạo
-        /// </summary>
-        public string CreatedBy { get; set; }
-
-        /// <summary>
-        /// Ngày chỉnh sửa gần nhất
-        /// </summary>
-        public DateTime? ModifiedDate { get; set; }
-
-        /// <summary>
-        /// Người chỉnh sửa gần nhất
-        /// </summary>
-        public string ModifiedBy { get; set; }
 
         /// <summary>
         /// Id phòng ban

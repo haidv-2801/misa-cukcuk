@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interfaces;
 using MISA.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,7 +16,9 @@ namespace MISA.CukCuk.Web.Controllers
     [ApiController]
     public class BaseEntityController<TEntity> : ControllerBase
     {
+        #region Declare
         IBaseService<TEntity> _baseService;
+        #endregion
 
         public BaseEntityController(IBaseService<TEntity> baseService)
         {
@@ -61,10 +65,11 @@ namespace MISA.CukCuk.Web.Controllers
         public IActionResult Post([FromBody] TEntity entity)
         {
             var serviceResult = _baseService.Insert(entity);
-            if ((int)serviceResult.Data == -1)
-                return BadRequest();
 
-            return Created("add", serviceResult);
+            //if (serviceResult.MISACode == MISACode.InValid)
+            //    return Content(HttpStatusCode.BadRequest, serviceResult);
+
+            return Created("Add", serviceResult);
         }
 
         /// <summary>
@@ -94,11 +99,17 @@ namespace MISA.CukCuk.Web.Controllers
             return Ok(rowAffects);
         }
 
-
         [HttpPost("import")]
         public IActionResult Import(IFormFile formFile, CancellationToken cancellationToken)
         {
-            return Ok(_baseService.readExcelFile(formFile, cancellationToken));
+            //1. Đọc file excel
+            var serviceResult = _baseService.readExcelFile(formFile, cancellationToken);
+
+            //2. Validate dữ liệu
+            
+
+            //3. Cất dữ liệu
+            return Ok(serviceResult);        
         }
     }
 }

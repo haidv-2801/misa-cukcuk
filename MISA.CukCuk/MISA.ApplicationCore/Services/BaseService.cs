@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -18,12 +19,19 @@ namespace MISA.ApplicationCore
     {
         #region Declare
         IBaseRepository<TEntity> _baseRepository;
+        ServiceResult _serviceResult = null;
+        List<string> _errors = null;
         #endregion
 
         #region Constructer
         public BaseService(IBaseRepository<TEntity> baseRepository)
         {
             _baseRepository = baseRepository;
+            
+            _serviceResult = new ServiceResult();
+
+            if (_errors == null)
+                _errors = new List<string>();
         }
         #endregion
 
@@ -42,23 +50,22 @@ namespace MISA.ApplicationCore
 
         public virtual ServiceResult Insert(TEntity entity)
         {
-            var serviceResult = new ServiceResult();
-
             var isValid = Validate(entity);
 
             if (isValid)
             {
-                serviceResult.Data = _baseRepository.Insert(entity);
-                serviceResult.MISACode = MISACode.Valid;
+                _serviceResult.Data = _baseRepository.Insert(entity);
+                _serviceResult.MISACode = MISACode.Valid;
+                _errors.Clear();
+                _errors.Add("Hợp lệ");
             }
             else
             {
-                serviceResult.Data = null;
-                serviceResult.MISACode = MISACode.InValid;
-                serviceResult.Messasge = "Dữ liệu không hợp lệ, vui lòng kiểm tra lại";
+                _serviceResult.MISACode = MISACode.InValid;
+                _serviceResult.Messasge = "Dữ liệu không hợp lệ, vui lòng kiểm tra lại";
             }
 
-            return serviceResult;
+            return _serviceResult;
         }
 
         public ServiceResult Update(Guid entityId, TEntity entity)
@@ -75,7 +82,7 @@ namespace MISA.ApplicationCore
             return serviceResult;
         }
 
-        private bool Validate(TEntity entity)
+        private bool Validate(TEntity entity, List<TEntity> resources = null)
         {
             var isValid = true;
 
@@ -91,16 +98,51 @@ namespace MISA.ApplicationCore
                 {
                     //1.1.1 Check bắt buộc nhập
                     if (propertyValue == null)
-                        isValid = false;
+                        isValid = validateRequired(propertyName, propertyValue, resources);
                 }
 
                 if (property.IsDefined(typeof(CheckDuplicate), false))
                 {
                     //1.1.2 Check trùng
-                    var entityDuplicate = _baseRepository.GetEntityByProperty(propertyName, propertyValue);
-                    if (entityDuplicate != null)
-                        isValid = false;
+                    isValid = validateDuplicate(entity, propertyName, propertyValue, resources);
                 }
+            }
+
+            return isValid;
+        }
+
+        private bool validateRequired(string propertyName, object propertyValue, List<TEntity> rources = null)
+        {
+            bool isValid = true;
+
+            if (propertyValue == null)
+            {
+                isValid = false;
+
+                var columnDisplayName = getAttributeDisplayName(propertyName);
+
+                _serviceResult.MISACode = MISACode.InValid;
+                _serviceResult.Messasge = "Có lỗi xảy ra, vui lòng kiểm tra lại.";
+                _serviceResult.Data = new { devMsg = "Dữ liệu không được trống", userMsg = "Dữ liệu không được trống" };
+            }
+
+            return isValid;
+        }
+
+        private bool validateDuplicate(TEntity entity, string propertyName, object propertyValue, List<TEntity> rources = null)
+        {
+            bool isValid = true;
+
+            var entityDuplicate = _baseRepository.GetEntityByProperty(propertyName, propertyValue);
+            if (entityDuplicate != null)
+            {
+                isValid = false;
+
+                var columnDisplayName = getAttributeDisplayName(propertyName);
+
+                _serviceResult.MISACode = MISACode.InValid;
+                _serviceResult.Messasge = "Có lỗi xảy ra, vui lòng kiểm tra lại.";
+                _serviceResult.Data = new { devMsg = $"{columnDisplayName} bị trùng", userMsg = $"{columnDisplayName} bị trùng" };
             }
 
             return isValid;
@@ -108,24 +150,23 @@ namespace MISA.ApplicationCore
 
         public async Task<ServiceResult> readExcelFile(IFormFile formFile, CancellationToken cancellationToken)
         {
-            var serviceResult = new ServiceResult();
 
             if (formFile == null || formFile.Length <= 0)
             {
-                serviceResult.Data = -1;
-                serviceResult.Messasge = "Không mở được file";
-                serviceResult.MISACode = MISACode.InValid;
+                _serviceResult.Data = -1;
+                _serviceResult.Messasge = "Không mở được file";
+                _serviceResult.MISACode = MISACode.InValid;
 
-                return serviceResult;
+                return _serviceResult;
             }
 
             if (!Path.GetExtension(formFile.FileName).Equals(".xlsx", StringComparison.OrdinalIgnoreCase))
             {
-                serviceResult.Data = -1;
-                serviceResult.Messasge = "File không được hỗ trợ";
-                serviceResult.MISACode = MISACode.InValid;
+                _serviceResult.Data = -1;
+                _serviceResult.Messasge = "File không được hỗ trợ";
+                _serviceResult.MISACode = MISACode.InValid;
 
-                return serviceResult;
+                return _serviceResult;
             }
 
             var list = new List<TEntity>();
@@ -140,6 +181,7 @@ namespace MISA.ApplicationCore
                     var rowCount = worksheet.Dimension.Rows;
                     var colCount = worksheet.Dimension.Columns;
 
+                    //Thông tin các thuộc tính trong object
                     var properties = typeof(TEntity).GetProperties()
                                     .Where(p => p.IsDefined(typeof(DisplayAttribute), false))
                                     .Select(p => new
@@ -147,50 +189,94 @@ namespace MISA.ApplicationCore
                                         PropertyName = p.Name,
                                         DisplayName = p.GetCustomAttributes(typeof(DisplayAttribute),
                                                 false).Cast<DisplayAttribute>().Single().Name,
-                                        DataType = p.GetType().Name
+                                        DataType = p.PropertyType
                                     });
-                    //foreach(var column in properties)
-                    //{
-                    //    var attribute = column.GetCustomAttributes(typeof(DisplayNameAttribute), true)
-                    //                             .Cast<DisplayNameAttribute>().Single();
-                    //    string displayName = attribute.DisplayName;
 
-                    //    for (var row = 2; row <= rowCount; row++)
-                    //    {
-                    //        list.Add(new TEntity
-                    //        {
-                    //            UserName = worksheet.Cells[row, 1].Value.ToString().Trim(),
-                    //            Age = int.Parse(worksheet.Cells[row, 2].Value.ToString().Trim()),
-                    //        });
-                    //    }
-                    //}
-
-                    for (var row = 2; row <= rowCount; row++)
+                    for (var row = 3; row <= rowCount; row++)
                     {
+                        var entity = (TEntity)Activator.CreateInstance(typeof(TEntity), new object[] { });
+
                         for (var col = 1; col <= colCount; col++)
                         {
-                            //foreach (var property in properties)
-                            //{
-                            ////var propInfo = typeof(TEntity).GetProperty(property.Name);
-                            //var displayNameAttribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), false);
-                            //var displayName = (displayNameAttribute[0] as DisplayNameAttribute).DisplayName;
-                            ////var attribute = property.GetCustomAttributes(typeof(DisplayNameAttribute), true)
-                            ////               .Cast<DisplayNameAttribute>().Single();
-                            ////string displayName = attribute.DisplayName;
-                            //}
-                            string test = worksheet.Cells[row, col].Value.ToString().Trim();
+                            //Tên hiển thị của cột
+                            string columnName = worksheet.Cells[2, col].Value != null
+                                ? worksheet.Cells[2, col].Value.ToString().Trim()
+                                : "";
+
+                            string value = worksheet.Cells[row, col].Value != null
+                                ? worksheet.Cells[row, col].Value.ToString().Trim()
+                                : "";
+
+                            //Tồn tại tên cột trong object
+                            var hasColumnName = properties.FirstOrDefault(x => columnName.ToLower().Contains(x.DisplayName.ToLower()));
+                            if (hasColumnName != null)
+                            {
+                                //Chuyển data vào object
+                                dynamic temp = convertValue(hasColumnName.DataType, value);
+                                entity.GetType().GetProperty(hasColumnName.PropertyName).SetValue(entity, temp);
+                            }
                         }
+                        list.Add(entity);
                     }
                 }
             }
 
-            serviceResult.Data = list;
-            serviceResult.Messasge = "OK";
-            serviceResult.MISACode = MISACode.Success;
+            //Validate
+            if(list.Count > 0)
+            {
+                var allEntitiesFromDb = _baseRepository.GetEntities();
+                foreach(var item in list)
+                {
+                    Validate(item, list);
+                    Validate(item, allEntitiesFromDb.ToList());
+                }
+            }
 
-            return serviceResult;
+            _serviceResult.Data = list;
+            _serviceResult.Messasge = "OK";
+            _serviceResult.MISACode = MISACode.Success;
+
+            return _serviceResult;
         }
 
+        /// <summary>
+        /// Trả về dữ liệu với kiểu dữ liệu truyền vào
+        /// </summary>
+        /// <param name="type">Kiểu dữ liệu</param>
+        /// <param name="value">Giá trị kiểu string</param>
+        /// <returns></returns>
+        private dynamic convertValue(Type type, string value)
+        {
+            dynamic res = null;
+            if (value == "")
+                return res;
+
+            if (type.Name == "Nullable`1")
+            {
+                type = Nullable.GetUnderlyingType(type);
+
+                if (type.Name == "DateTime")
+                {
+                    value = String.Join("-", value.Split('/').Reverse());
+                }
+            }
+
+            res = Convert.ChangeType(value, type);
+
+            return res;
+        }
+
+        /// <summary>
+        /// Lấy tên hiển thị của trường trong entity
+        /// </summary>
+        /// <param name="attributeName">Tên thuộc tính</param>
+        /// <returns>Tên hiển thị</returns>
+        private String getAttributeDisplayName(string attributeName)
+        {
+            var res = typeof(TEntity).GetProperty(attributeName).GetCustomAttributes(typeof(DisplayAttribute),
+                                                false).Cast<DisplayAttribute>().Single().Name;
+            return res;
+        }
         #endregion
     }
 }

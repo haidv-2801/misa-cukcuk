@@ -10,7 +10,7 @@ namespace MISA.ApplicationCore.Entities
     /// Khách hàng
     /// </summary>
     /// CreatedBy: DVHAI (24/06/2021)
-    public class Customer
+    public class Customer : BaseEntity
     {
         #region Property
         /// <summary>
@@ -65,24 +65,8 @@ namespace MISA.ApplicationCore.Entities
         public string Email { get; set; }
 
         /// <summary>
-        /// Ngày tạo
-        /// </summary>
-        public DateTime? CreatedDate { get; set; }
-
-        /// <summary>
-        /// Người tạo
-        /// </summary>
-        public string CreatedBy { get; set; }
-
-        /// <summary>
-        /// Ngày sửa
-        /// </summary>
-        public DateTime? ModifiedDate { get; set; }
-
-        /// <summary>
         /// Khóa ngoại đến nhóm khách hàng
         /// </summary>
-        [Display(Name = "Nhóm khách hàng")]
         public Guid? CustomerGroupId { get; set; }
 
         /// <summary>

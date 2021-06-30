@@ -21,4 +21,11 @@ namespace MISA.ApplicationCore.Entities
         /// </summary>
         Success = 900,
     }
+
+    public enum EntityState
+    {
+        Add = 1,
+        Update = 2,
+        Delete = 3
+    }
 }

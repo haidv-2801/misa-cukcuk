@@ -179,3 +179,15 @@ D:\nam3ki2\misa\projects\MISA.CukCuk\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin
 D:\nam3ki2\misa\projects\MISA.CukCuk\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
 D:\nam3ki2\misa\projects\MISA.CukCuk\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
 D:\nam3ki2\misa\projects\MISA.CukCuk\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.MvcApplicationPartsAssemblyInfo.cs
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\EPPlus.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\System.Xml.XPath.XmlDocument.dll
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\obj\Debug\netcoreapp3.1\MISA.CukCuk.Web.MvcApplicationPartsAssemblyInfo.cs
+E:\dvhai\misa-cukcuk\MISA.CukCuk\MISA.CukCuk.Web\bin\Debug\netcoreapp3.1\AutoMapper.dll
