@@ -58,5 +58,11 @@ namespace MISA.ApplicationCore.Interfaces
         /// <returns></returns>
         Task<ServiceResult> readExcelFile(IFormFile formFile, CancellationToken cancellationToken);
 
+        /// <summary>
+        /// Thên nhiều bản ghi
+        /// </summary>
+        /// <param name="ieEntities"></param>
+        /// <returns></returns>
+        ServiceResult MultiInsert(IEnumerable<TEntity> ieEntities);
     }
 }

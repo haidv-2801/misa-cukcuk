@@ -126,8 +126,9 @@ namespace MISA.ApplicationCore
         /// </summary>
         /// <param name="entitiesImport">Danh sách thực thể cần validate</param>
         /// <returns>Kết quả validate (true-false)</returns>
-        public List<TEntity> validateDataImport(List<TEntity> entitiesImport)
+        public bool validateDataImport(List<TEntity> entitiesImport)
         {
+            bool allIsValid = true;
             IDictionary<object, List<string>> dict = new Dictionary<object, List<string>>();
 
             foreach (var entity in entitiesImport)
@@ -177,10 +178,12 @@ namespace MISA.ApplicationCore
 
                 if (isValid == true)
                     entity.Status.Add("Hợp lệ");
+                else
+                    allIsValid = false;
 
             }
 
-            return entitiesImport;
+            return allIsValid;
         }
 
         private bool validateRequired(TEntity entity, PropertyInfo propertyInfo)
@@ -316,11 +319,19 @@ namespace MISA.ApplicationCore
             //Trên databse
             //Trên tệp import
             _entityDbList = _baseRepository.GetEntities();
-            list = validateDataImport(list);
-
             _serviceResult.Data = list;
-            _serviceResult.Messasge = "OK";
-            _serviceResult.MISACode = MISACode.Success;
+            bool allIsValid = validateDataImport(list);
+
+            if (allIsValid == true)
+            {
+                _serviceResult.Messasge = "OK";
+                _serviceResult.MISACode = MISACode.Valid;
+            }
+            else
+            {
+                _serviceResult.Messasge = "Chưa OK";
+                _serviceResult.MISACode = MISACode.InValid;
+            }
 
             return _serviceResult;
         }
@@ -409,6 +420,42 @@ namespace MISA.ApplicationCore
             var item = _entityDbList.FirstOrDefault(x => x.GetType().GetProperty(propertyName).GetValue(x).ToString() == propertyValue.ToString());
 
             return item;
+        }
+
+        public ServiceResult MultiInsert(IEnumerable<TEntity> ieEntities)
+        {
+            //Validate lại 1 lần nữa trên database
+            int success = 0, fail = 0;
+            _entityDbList = _baseRepository.GetEntities();
+            foreach (var entity in ieEntities)
+            {
+                bool isValid = true;
+                var properties = typeof(TEntity).GetProperties();
+                foreach (var property in properties)
+                {
+                    var propertyValue = property.GetValue(entity);
+                    if (property.IsDefined(typeof(IDuplicate), false) && propertyValue != null)
+                        isValid = validateDuplicate(entity, property, entityDbList) == true ? isValid : false;
+                }
+
+                //Nếu hợp lệ thì cất
+                if (isValid == true)
+                {
+                    var rowAffects = _baseRepository.Insert(entity);
+                    //Những thằng thêm thành công
+                    success += rowAffects;
+                }
+                else { }
+
+            }
+
+            fail = ieEntities.Count() - success;
+
+            _serviceResult.Data = new { successRecords = success, failRecords = fail };
+            _serviceResult.Messasge = "";
+            _serviceResult.MISACode = fail > 0 ? MISACode.InValid : MISACode.Success;
+
+            return _serviceResult;
         }
         #endregion
     }

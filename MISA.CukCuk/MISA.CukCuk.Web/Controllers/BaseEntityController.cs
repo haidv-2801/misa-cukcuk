@@ -113,7 +113,7 @@ namespace MISA.CukCuk.Web.Controllers
         }
 
         [HttpPost("multiinsert")]
-        public IActionResult multiinsert([FromBody] IEnumerable<TEntity> ieEntities)
+        public IActionResult MultiInsert([FromBody] IEnumerable<TEntity> ieEntities)
         {
 
             return Ok();
