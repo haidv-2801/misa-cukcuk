@@ -128,6 +128,7 @@ namespace MISA.ApplicationCore
         /// <returns>Kết quả validate (true-false)</returns>
         public bool validateDataImport(List<TEntity> entitiesImport)
         {
+            _entityDbList = _baseRepository.GetEntities();
             bool allIsValid = true;
             IDictionary<object, List<string>> dict = new Dictionary<object, List<string>>();
 
@@ -263,6 +264,7 @@ namespace MISA.ApplicationCore
                 return _serviceResult;
             }
 
+            //Lưu thông tin dãy các entity
             var list = new List<TEntity>();
 
             using (var stream = new MemoryStream())
@@ -318,9 +320,8 @@ namespace MISA.ApplicationCore
             //Validate
             //Trên databse
             //Trên tệp import
-            _entityDbList = _baseRepository.GetEntities();
-            _serviceResult.Data = list;
             bool allIsValid = validateDataImport(list);
+            _serviceResult.Data = list;
 
             if (allIsValid == true)
             {
@@ -393,6 +394,7 @@ namespace MISA.ApplicationCore
         /// <param name="entity"></param>
         /// <param name="propertyInfo"></param>
         /// <returns>TEntity</returns>
+        /// DVHAI (07/01/2021)
         private TEntity entityDbSource(TEntity entity, PropertyInfo propertyInfo)
         {
 
@@ -412,6 +414,13 @@ namespace MISA.ApplicationCore
             return entityDuplicate;
         }
 
+        /// <summary>
+        /// Nguồn dữ liệu từ database phục vụ validate
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="propertyInfo"></param>
+        /// <returns>TEntity</returns>
+        /// DVHAI (07/01/2021)
         private TEntity entityDbList(TEntity entity, PropertyInfo propertyInfo)
         {
             var propertyName = propertyInfo.Name;
@@ -422,31 +431,26 @@ namespace MISA.ApplicationCore
             return item;
         }
 
+        /// <summary>
+        /// Cất nhiều bản ghi
+        /// </summary>
+        /// <param name="ieEntities"></param>
+        /// <returns></returns>
+        /// DVHAI (07/01/2021)
         public ServiceResult MultiInsert(IEnumerable<TEntity> ieEntities)
         {
             //Validate lại 1 lần nữa trên database
             int success = 0, fail = 0;
-            _entityDbList = _baseRepository.GetEntities();
-            foreach (var entity in ieEntities)
+            
+            bool allIsValid = validateDataImport(ieEntities.ToList());
+
+            foreach(var entity in ieEntities)
             {
-                bool isValid = true;
-                var properties = typeof(TEntity).GetProperties();
-                foreach (var property in properties)
+                if(entity.Status.Count() > 0 && entity.Status[0].Equals("Hợp lệ"))
                 {
-                    var propertyValue = property.GetValue(entity);
-                    if (property.IsDefined(typeof(IDuplicate), false) && propertyValue != null)
-                        isValid = validateDuplicate(entity, property, entityDbList) == true ? isValid : false;
+                    var rowAffect = _baseRepository.Insert(entity);
+                    success += rowAffect;
                 }
-
-                //Nếu hợp lệ thì cất
-                if (isValid == true)
-                {
-                    var rowAffects = _baseRepository.Insert(entity);
-                    //Những thằng thêm thành công
-                    success += rowAffects;
-                }
-                else { }
-
             }
 
             fail = ieEntities.Count() - success;

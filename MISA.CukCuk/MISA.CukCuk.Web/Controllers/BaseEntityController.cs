@@ -43,7 +43,7 @@ namespace MISA.CukCuk.Web.Controllers
         /// </summary>
         /// <param name="id">id của thực thể</param>
         /// <returns>Một thực thể tìm được theo id</returns>
-        /// CreateedBy: DVHAI 24/06/2021
+        /// CreatedBy: DVHAI 24/06/2021
         [HttpGet("{id}")]
         public IActionResult Get(string id)
         {
@@ -60,7 +60,7 @@ namespace MISA.CukCuk.Web.Controllers
         /// </summary>
         /// <param name="entity"></param>
         /// <returns>Sô bản ghi bị ảnh hưởng</returns>
-        /// CreateedBy: DVHAI 24/06/2021
+        /// CreatedBy: DVHAI 24/06/2021
         [HttpPost]
         public IActionResult Post([FromBody] TEntity entity)
         {
@@ -78,10 +78,11 @@ namespace MISA.CukCuk.Web.Controllers
         /// <param name="id">id của bản ghi</param>
         /// <param name="entity">thông tin của bản ghi</param>
         /// <returns>Số bản ghi bị ảnh hưởng</returns>
-        /// CreateedBy: DVHAI 24/06/2021
+        /// CreatedBy: DVHAI 24/06/2021
         [HttpPut("{id}")]
         public IActionResult Put([FromRoute] string id, [FromBody] TEntity entity)
         {
+            //Sử lí kiểu id động ở đây
             var serviceResult = _baseService.Update(Guid.Parse(id), entity);
 
             return Ok(serviceResult);
@@ -104,10 +105,7 @@ namespace MISA.CukCuk.Web.Controllers
         {
             //1. Đọc file excel
             var serviceResult = _baseService.readExcelFile(formFile, cancellationToken);
-
             //2. Validate dữ liệu
-
-
             //3. Cất dữ liệu
             return Ok(serviceResult);
         }
@@ -115,8 +113,8 @@ namespace MISA.CukCuk.Web.Controllers
         [HttpPost("multiinsert")]
         public IActionResult MultiInsert([FromBody] IEnumerable<TEntity> ieEntities)
         {
-
-            return Ok();
+            var serviceResult = _baseService.MultiInsert(ieEntities);
+            return Ok(serviceResult);
         }
     }
 }

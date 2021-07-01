@@ -61,6 +61,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Email khách hàng
         /// </summary>
+        [IRequired]
         [IDuplicate]
         [Display(Name = "Email")]
         public string Email { get; set; }
