@@ -54,11 +54,20 @@ namespace MISA.ApplicationCore.Interfaces
         /// DVHAI (25/06/2021)
         int Delete(Guid entityId);
 
-        /// <summary>
-        /// Lấy thực thể theo thuộc tính
-        /// </summary>
-        /// <param name="propertyInfo"></param>
-        /// <returns>Bản ghi thực thể</returns>
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="entity"></param>
+       /// <param name="property"></param>
+       /// <returns></returns>
+        TEntity GetEntityByProperty(TEntity entity, PropertyInfo property);
+
+       /// <summary>
+       /// 
+       /// </summary>
+       /// <param name="propertyName"></param>
+       /// <param name="propertyValue"></param>
+       /// <returns></returns>
         TEntity GetEntityByProperty(string propertyName, object propertyValue);
     }
 }

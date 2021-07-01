@@ -19,7 +19,9 @@ namespace MISA.Infrastructure
         {
 
         }
+        #endregion
 
+        #region Methods
         public Employee GetEmployeeByCode(string employeeCode)
         {
             var employee = GetEntityByProperty("EmployeeCode", employeeCode);

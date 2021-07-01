@@ -12,7 +12,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MISA.ApplicationCore.Interfaces
 {
-    public class BaseRepository<TEntity> : IBaseRepository<TEntity>
+    public class BaseRepository<TEntity> : IBaseRepository<TEntity> where TEntity:BaseEntity
     {
         #region Declare
         IConfiguration _configuration;
@@ -131,31 +131,32 @@ namespace MISA.ApplicationCore.Interfaces
             return keyProperty;
         }
 
+        public TEntity GetEntityByProperty(TEntity entity, PropertyInfo property)
+        {
+            var propertyName = property.Name;
+            var propertyValue = property.GetValue(entity);
+            var keyName = GetKeyProperty().Name;
+            var keyValue = GetKeyProperty().GetValue(entity);
+
+            string query = string.Empty;
+
+            if (entity.EntityState == EntityState.Add)
+                query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
+            else if (entity.EntityState == EntityState.Update)
+                query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}' AND {keyName} <> '{keyValue}'";
+            else
+                return null;
+
+            var entityReturn = _dbConnection.Query<TEntity>(query, commandType: CommandType.Text).FirstOrDefault();
+            return entityReturn;
+        }
+
         public TEntity GetEntityByProperty(string propertyName, object propertyValue)
         {
             string query = $"SELECT * FROM {_tableName} WHERE {propertyName} = '{propertyValue}'";
-            var entity = _dbConnection.Query<TEntity>(query, commandType: CommandType.Text).FirstOrDefault();
-            return entity;
+            var entityReturn = _dbConnection.Query<TEntity>(query, commandType: CommandType.Text).FirstOrDefault();
+            return entityReturn;
         }
-
-        //public int DynamicDelete(TEntity entity)
-        //{
-        //    var dynamicParams = MappingDbType(entity);
-
-        //    string procName = buildStoreProcedure();   
-
-        //    //2. Kết nối tới CSDL:
-        //    int rowAffects = _dbConnection.Execute($"{procName}", param: dynamicParams, commandType: CommandType.StoredProcedure);
-
-        //    //2. Trả về số bản ghi bị ảnh hưởng
-        //    return rowAffects;
-        //}
-
-        //protected virtual string buildStoreProcedure()
-        //{
-        //    return $"Proc_Delete{_tableName}ById";
-        //}
-
         #endregion
     }
 }

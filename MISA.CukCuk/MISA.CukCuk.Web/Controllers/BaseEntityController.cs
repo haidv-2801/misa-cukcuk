@@ -106,10 +106,17 @@ namespace MISA.CukCuk.Web.Controllers
             var serviceResult = _baseService.readExcelFile(formFile, cancellationToken);
 
             //2. Validate dữ liệu
-            
+
 
             //3. Cất dữ liệu
-            return Ok(serviceResult);        
+            return Ok(serviceResult);
+        }
+
+        [HttpPost("multiinsert")]
+        public IActionResult multiinsert([FromBody] IEnumerable<TEntity> ieEntities)
+        {
+
+            return Ok();
         }
     }
 }

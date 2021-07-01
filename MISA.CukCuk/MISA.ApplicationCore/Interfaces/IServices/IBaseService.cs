@@ -57,5 +57,6 @@ namespace MISA.ApplicationCore.Interfaces
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<ServiceResult> readExcelFile(IFormFile formFile, CancellationToken cancellationToken);
+
     }
 }

@@ -16,18 +16,23 @@ using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore
 {
-    public class BaseService<TEntity> : IBaseService<TEntity>
+    public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : BaseEntity
     {
         #region Declare
         IBaseRepository<TEntity> _baseRepository;
         ServiceResult _serviceResult = null;
+        IEnumerable<TEntity> _entityDbList = null;
         #endregion
 
         #region Constructer
         public BaseService(IBaseRepository<TEntity> baseRepository)
         {
             _baseRepository = baseRepository;
-            _serviceResult = new ServiceResult();
+            _serviceResult = new ServiceResult()
+            {
+                MISACode = MISACode.Success
+            };
+            _entityDbList = new List<TEntity>();
         }
         #endregion
 
@@ -46,6 +51,8 @@ namespace MISA.ApplicationCore
 
         public virtual ServiceResult Insert(TEntity entity)
         {
+            entity.EntityState = EntityState.Add;
+
             //1. Validate tất cả các trường nếu được gắn thẻ
             var isValid = Validate(entity);
 
@@ -66,16 +73,27 @@ namespace MISA.ApplicationCore
 
         public ServiceResult Update(Guid entityId, TEntity entity)
         {
-            var serviceResult = new ServiceResult();
-            int rowAffects = _baseRepository.Update(entityId, entity);
-            return serviceResult;
+            entity.EntityState = EntityState.Update;
+
+            //1. Validate tất cả các trường nếu được gắn thẻ
+            var isValid = Validate(entity);
+            if (isValid)
+            {
+                _serviceResult.Data = _baseRepository.Update(entityId, entity);
+                _serviceResult.Messasge = "Sửa thành công";
+            }
+            else
+            {
+                _serviceResult.MISACode = MISACode.InValid;
+                _serviceResult.Messasge = "Dữ liệu không hợp lệ, vui lòng kiểm tra lại";
+            }
+            return _serviceResult;
         }
 
         public ServiceResult Delete(Guid entityId)
         {
-            var serviceResult = new ServiceResult();
-            int rowAffects = _baseRepository.Delete(entityId);
-            return serviceResult;
+            _serviceResult.Data = _baseRepository.Delete(entityId);
+            return _serviceResult;
         }
 
         private bool Validate(TEntity entity)
@@ -96,11 +114,73 @@ namespace MISA.ApplicationCore
                 if (isValid && property.IsDefined(typeof(IDuplicate), false))
                 {
                     //1.1.2 Check trùng
-                    isValid = validateDuplicate(entity, property);
+                    isValid = validateDuplicate(entity, property, entityDbSource);
                 }
             }
 
             return isValid;
+        }
+
+        /// <summary>
+        /// Validate dữ liệu import từ file
+        /// </summary>
+        /// <param name="entitiesImport">Danh sách thực thể cần validate</param>
+        /// <returns>Kết quả validate (true-false)</returns>
+        public List<TEntity> validateDataImport(List<TEntity> entitiesImport)
+        {
+            IDictionary<object, List<string>> dict = new Dictionary<object, List<string>>();
+
+            foreach (var entity in entitiesImport)
+            {
+                bool isValid = true;
+                entity.Status = new List<string>();
+
+                //1. Đọc các property
+                var properties = entity.GetType().GetProperties();
+                foreach (var property in properties)
+                {
+                    var propertyValue = property.GetValue(entity);
+                    string displayName = getAttributeDisplayName(property.Name);
+
+                    //1.1 Kiểm tra xem  có attribute cần phải validate không
+                    if (property.IsDefined(typeof(IRequired), false))
+                    {
+                        //1.1.1 Check bắt buộc nhập
+                        isValid = validateRequired(entity, property);
+                        if (isValid == false)
+                            entity.Status.Add($"{displayName} không được trống");
+                    }
+
+                    if (property.IsDefined(typeof(IDuplicate), false) && propertyValue != null)
+                    {
+                        //Check duplicate trên dãy data import
+                        if (dict.ContainsKey(propertyValue) == true)
+                        {
+                            if (dict[propertyValue].Contains(property.Name))
+                            {
+                                isValid = false;
+                                entity.Status.Add($"{displayName} {propertyValue} đã tồn tại");
+                            }
+                        }
+                        else
+                            dict.Add(propertyValue, new List<string>());
+
+                        if (!dict[propertyValue].Contains(property.Name))
+                            dict[propertyValue].Add(property.Name);
+
+                        //Check duplicate trên server
+                        isValid = validateDuplicate(entity, property, entityDbList) == true ? isValid : false;
+                        if (isValid == false)
+                            entity.Status.Add($"{displayName} {propertyValue} đã tồn tại trên nhập khẩu");
+                    }
+                }
+
+                if (isValid == true)
+                    entity.Status.Add("Hợp lệ");
+
+            }
+
+            return entitiesImport;
         }
 
         private bool validateRequired(TEntity entity, PropertyInfo propertyInfo)
@@ -123,14 +203,22 @@ namespace MISA.ApplicationCore
             return isValid;
         }
 
-        private bool validateDuplicate(TEntity entity, PropertyInfo propertyInfo)
+        /// <summary>
+        /// Validate duplicate
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="propertyInfo"></param>
+        /// <param name="eSource">TEntity</param>
+        /// <returns></returns>
+        private bool validateDuplicate(TEntity entity, PropertyInfo propertyInfo, entitySource eSource)
         {
             bool isValid = true;
 
             var propertyName = propertyInfo.Name;
-            var propertyValue = propertyInfo.GetValue(entity);
             var propertyDisplayName = getAttributeDisplayName(propertyName);
-            var entityDuplicate = _baseRepository.GetEntityByProperty(propertyName, propertyValue);
+
+            //Tùy chỉnh nguồn dữ liệu để validate, trạng thái thêm hoắc sửa
+            var entityDuplicate = eSource(entity, propertyInfo);
 
             if (entityDuplicate != null)
             {
@@ -224,6 +312,12 @@ namespace MISA.ApplicationCore
                 }
             }
 
+            //Validate
+            //Trên databse
+            //Trên tệp import
+            _entityDbList = _baseRepository.GetEntities();
+            list = validateDataImport(list);
+
             _serviceResult.Data = list;
             _serviceResult.Messasge = "OK";
             _serviceResult.MISACode = MISACode.Success;
@@ -273,6 +367,48 @@ namespace MISA.ApplicationCore
             }
             catch { }
             return res;
+        }
+
+        /// <summary>
+        /// Điều chỉnh nguồn dữ liệu để validate
+        /// </summary>
+        /// <returns>TEntity</returns>
+        /// DVHAI (07/01/2021)
+        public delegate TEntity entitySource(TEntity entity, PropertyInfo propertyInfo);
+
+        /// <summary>
+        /// Nguồn enitty từ database để phục vụ validate theo trường hợp
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <param name="propertyInfo"></param>
+        /// <returns>TEntity</returns>
+        private TEntity entityDbSource(TEntity entity, PropertyInfo propertyInfo)
+        {
+
+            var propertyName = propertyInfo.Name;
+            var propertyValue = propertyInfo.GetValue(entity);
+
+            //Mặc định là thêm
+            var entityDuplicate = _baseRepository.GetEntityByProperty(propertyName, propertyValue);
+
+            if (entity.EntityState == EntityState.Add)
+                entityDuplicate = _baseRepository.GetEntityByProperty(propertyName, propertyValue);
+            else if (entity.EntityState == EntityState.Update)
+                entityDuplicate = _baseRepository.GetEntityByProperty(entity, propertyInfo);
+            else
+                entityDuplicate = null;
+
+            return entityDuplicate;
+        }
+
+        private TEntity entityDbList(TEntity entity, PropertyInfo propertyInfo)
+        {
+            var propertyName = propertyInfo.Name;
+            var propertyValue = propertyInfo.GetValue(entity);
+
+            var item = _entityDbList.FirstOrDefault(x => x.GetType().GetProperty(propertyName).GetValue(x).ToString() == propertyValue.ToString());
+
+            return item;
         }
         #endregion
     }

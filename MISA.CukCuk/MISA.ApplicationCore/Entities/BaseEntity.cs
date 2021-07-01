@@ -52,6 +52,6 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Trạng thái insert của entity
         /// </summary>
-        public IEnumerable<String> Status { get; set; }
+        public List<String> Status { get; set; }
     }
 }
