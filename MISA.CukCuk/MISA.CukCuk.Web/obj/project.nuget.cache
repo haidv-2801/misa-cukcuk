@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gJL6l7y2bBIf8rXCTAWXi7oCmZUmuRcnz9D1MLTBEghbHm1VPenMrcID7CkdJvy/P3NYoM/zllZg9dnhK4C8mw==",
+  "dgSpecHash": "sc8+effIFCT19IfS2OVPuPrPOveiD6XpvuNgaqLZz8dGeFHhUvwjPPDVlRwFmqjdp9T7m+t1lvsjeKpAV8+5mA==",
   "success": true,
-  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.CukCuk.Web\\MISA.CukCuk.Web.csproj",
+  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk1\\misa-cukcuk\\MISA.CukCuk\\MISA.CukCuk.Web\\MISA.CukCuk.Web.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",

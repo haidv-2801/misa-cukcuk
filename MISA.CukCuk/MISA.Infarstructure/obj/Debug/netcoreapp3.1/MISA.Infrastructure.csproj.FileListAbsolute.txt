@@ -46,3 +46,15 @@ D:\nam3ki2\misa\projects\MISA.CukCuk\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure
 D:\nam3ki2\misa\projects\MISA.CukCuk\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.csproj.CopyComplete
 D:\nam3ki2\misa\projects\MISA.CukCuk\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.dll
 D:\nam3ki2\misa\projects\MISA.CukCuk\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\netcoreapp3.1\MISA.Infrastructure.deps.json
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\netcoreapp3.1\MISA.Infrastructure.dll
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\netcoreapp3.1\MISA.Infrastructure.pdb
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.dll
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\bin\Debug\netcoreapp3.1\MISA.ApplicationCore.pdb
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.csprojAssemblyReference.cache
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.AssemblyInfoInputs.cache
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.AssemblyInfo.cs
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.csproj.CoreCompileInputs.cache
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.csproj.CopyComplete
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.dll
+D:\nam3ki2\misa\projects\MISA.CukCuk1\misa-cukcuk\MISA.CukCuk\MISA.Infarstructure\obj\Debug\netcoreapp3.1\MISA.Infrastructure.pdb

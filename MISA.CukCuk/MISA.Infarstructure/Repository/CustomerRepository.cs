@@ -23,11 +23,8 @@ namespace MISA.Infarstructure
         #region Methods
         public Customer GetCustomerByCode(string customerCode)
         {
-            var customerDuplicate = _dbConnection
-                    .Query<Customer>($"SELECT * FROM {_tableName} WHERE CustomerCode = '{customerCode}'", commandType: CommandType.Text)
-                    .FirstOrDefault();
-
-            return customerDuplicate;
+            var customer = GetEntityByProperty("CustomerCode", customerCode);
+            return customer;
         }
         #endregion
     }

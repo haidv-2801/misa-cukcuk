@@ -138,23 +138,23 @@ namespace MISA.ApplicationCore.Interfaces
             return entity;
         }
 
-        public int DynamicDelete(TEntity entity)
-        {
-            var dynamicParams = MappingDbType(entity);
+        //public int DynamicDelete(TEntity entity)
+        //{
+        //    var dynamicParams = MappingDbType(entity);
 
-            string procName = buildStoreProcedure();   
+        //    string procName = buildStoreProcedure();   
 
-            //2. Kết nối tới CSDL:
-            int rowAffects = _dbConnection.Execute($"{procName}", param: dynamicParams, commandType: CommandType.StoredProcedure);
+        //    //2. Kết nối tới CSDL:
+        //    int rowAffects = _dbConnection.Execute($"{procName}", param: dynamicParams, commandType: CommandType.StoredProcedure);
 
-            //2. Trả về số bản ghi bị ảnh hưởng
-            return rowAffects;
-        }
+        //    //2. Trả về số bản ghi bị ảnh hưởng
+        //    return rowAffects;
+        //}
 
-        protected virtual string buildStoreProcedure()
-        {
-            return $"Proc_Delete{_tableName}ById";
-        }
+        //protected virtual string buildStoreProcedure()
+        //{
+        //    return $"Proc_Delete{_tableName}ById";
+        //}
 
         #endregion
     }

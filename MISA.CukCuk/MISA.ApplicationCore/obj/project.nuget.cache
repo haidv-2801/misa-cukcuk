@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IQ+ma6pk2eWYhQPa0f0moH2FWsyd5IC//tD2HRb0G6sVJS5Zvh5vIVZg3nzMVkQjoDJTtl0yL5JhhTGL99/EzQ==",
+  "dgSpecHash": "3WptPoBvMWoAKcgglmo6awWg48M6aBVbjmJQV9N3yU2gprNj9jbGXfXndbX0HZhKoUZUCGtNge9UwlX8Yzvp5g==",
   "success": true,
-  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
+  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk1\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\epplus\\4.5.2.1\\epplus.4.5.2.1.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.7\\microsoft.aspnetcore.http.features.5.0.7.nupkg.sha512",

@@ -21,18 +21,13 @@ namespace MISA.ApplicationCore
         #region Declare
         IBaseRepository<TEntity> _baseRepository;
         ServiceResult _serviceResult = null;
-        List<string> _errors = null;
         #endregion
 
         #region Constructer
         public BaseService(IBaseRepository<TEntity> baseRepository)
         {
             _baseRepository = baseRepository;
-
             _serviceResult = new ServiceResult();
-
-            if (_errors == null)
-                _errors = new List<string>();
         }
         #endregion
 
@@ -51,12 +46,14 @@ namespace MISA.ApplicationCore
 
         public virtual ServiceResult Insert(TEntity entity)
         {
+            //1. Validate tất cả các trường nếu được gắn thẻ
             var isValid = Validate(entity);
 
             if (isValid)
             {
                 _serviceResult.Data = _baseRepository.Insert(entity);
                 _serviceResult.MISACode = MISACode.Valid;
+                _serviceResult.Messasge = "Thêm thành công";
             }
             else
             {
@@ -89,15 +86,11 @@ namespace MISA.ApplicationCore
             var properties = entity.GetType().GetProperties();
             foreach (var property in properties)
             {
-                var propertyName = property.Name;
-                var propertyValue = property.GetValue(entity);
-
                 //1.1 Kiểm tra xem  có attribute cần phải validate không
                 if (isValid && property.IsDefined(typeof(IRequired), false))
                 {
                     //1.1.1 Check bắt buộc nhập
-                    if (propertyValue == null)
-                        isValid = validateRequired(entity, property);
+                    isValid = validateRequired(entity, property);
                 }
 
                 if (isValid && property.IsDefined(typeof(IDuplicate), false))
@@ -272,8 +265,13 @@ namespace MISA.ApplicationCore
         /// <returns>Tên hiển thị</returns>
         private String getAttributeDisplayName(string attributeName)
         {
-            var res = typeof(TEntity).GetProperty(attributeName).GetCustomAttributes(typeof(DisplayAttribute),
-                                                false).Cast<DisplayAttribute>().Single().Name;
+            var res = attributeName;
+            try
+            {
+                res = typeof(TEntity).GetProperty(attributeName).GetCustomAttributes(typeof(DisplayAttribute),
+                                               false).Cast<DisplayAttribute>().Single().Name;
+            }
+            catch { }
             return res;
         }
         #endregion

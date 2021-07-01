@@ -22,7 +22,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Mã nhân viên
         /// </summary>
-        [CheckDuplicate]
+        [IDuplicate]
         public string EmployeeCode { get; set; }
 
         /// <summary>
@@ -48,11 +48,13 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Email
         /// </summary>
+        [IDuplicate]
         public string Email { get; set; }
 
         /// <summary>
         /// Số điện thoại
         /// </summary>
+        [IDuplicate]
         public string PhoneNumber { get; set; }
 
         /// <summary>

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0z3Ui+7tbGomw+HY+Hm7mBZvwIeDe1LxUy75MShfJxnw/yDKniAaKJFhZqmR7PWivyGlL5l3k8nCnEmth1zsBQ==",
+  "dgSpecHash": "lIYVw0UsxZ5vgnScd4kjGwm3xAVlMMMsCpUwflKxmGixlF5A5N43N5b/99dYFhE6w400++D5vhgNC+gCnvTZDA==",
   "success": true,
-  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
+  "projectFilePath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk1\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\epplus\\4.5.2.1\\epplus.4.5.2.1.nupkg.sha512",

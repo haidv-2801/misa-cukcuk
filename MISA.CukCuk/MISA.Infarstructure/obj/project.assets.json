@@ -5329,11 +5329,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
+      "projectUniqueName": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk1\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
       "projectName": "MISA.Infrastructure",
-      "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
+      "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk1\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\MISA.Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\obj\\",
+      "outputPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk1\\misa-cukcuk\\MISA.CukCuk\\MISA.Infarstructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -5350,8 +5350,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
-              "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj"
+            "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk1\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
+              "projectPath": "D:\\nam3ki2\\misa\\projects\\MISA.CukCuk1\\misa-cukcuk\\MISA.CukCuk\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj"
             }
           }
         }
