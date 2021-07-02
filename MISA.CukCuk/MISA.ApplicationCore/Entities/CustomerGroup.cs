@@ -4,32 +4,26 @@ using System.Text;
 
 namespace MISA.ApplicationCore.Entities
 {
-    class CustomerGroup
+    public class CustomerGroup : BaseEntity
     {
+        /// <summary>
+        /// Id nhóm khách hàng
+        /// </summary>
         public Guid CustomerGroupId { get; set; }
 
+        /// <summary>
+        /// Tên nhóm khách hàng
+        /// </summary>
         public string CustomerGroupName { get; set; }
 
+        /// <summary>
+        /// Id của lớp cha nhóm khách hàng
+        /// </summary>
+        public string ParentId { get; set; }
+
+        /// <summary>
+        /// Mô tả
+        /// </summary>
         public string Description { get; set; }
-
-        /// <summary>
-        /// Ngày tạo
-        /// </summary>
-        public DateTime? CreatedDate { get; set; }
-
-        /// <summary>
-        /// Người tạo
-        /// </summary>
-        public string CreatedBy { get; set; }
-
-        /// <summary>
-        /// Ngày chỉnh sửa gần nhất
-        /// </summary>
-        public DateTime? ModifiedDate { get; set; }
-
-        /// <summary>
-        /// Người chỉnh sửa gần nhất
-        /// </summary>
-        public string ModifiedBy { get; set; }
     }
 }

@@ -72,6 +72,12 @@ namespace MISA.ApplicationCore.Entities
         public Guid? CustomerGroupId { get; set; }
 
         /// <summary>
+        /// Tên nhóm khách hàng
+        /// </summary>
+        [Display(Name = "Nhóm khách hàng")]
+        public string CustomerGroupName { get; set; }
+
+        /// <summary>
         /// Số thẻ thành viên
         /// </summary>
         [Display(Name = "Mã thẻ thành viên")]

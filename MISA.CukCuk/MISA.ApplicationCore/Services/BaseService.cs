@@ -128,6 +128,7 @@ namespace MISA.ApplicationCore
         /// <returns>Kết quả validate (true-false)</returns>
         public bool validateDataImport(List<TEntity> entitiesImport)
         {
+            //Lấy tất cả bản ghi trên database đê tránh request nhiều
             _entityDbList = _baseRepository.GetEntities();
             bool allIsValid = true;
             IDictionary<object, List<string>> dict = new Dictionary<object, List<string>>();
@@ -177,14 +178,26 @@ namespace MISA.ApplicationCore
                     }
                 }
 
+                //Validate từng màn hình
+                isValid = validateCustomerGroupCustom(entity) == true ? isValid : false;
+
                 if (isValid == true)
-                    entity.Status.Add("Hợp lệ");
+                    entity.Status.Add(MISACode.Valid.ToString());
                 else
                     allIsValid = false;
 
             }
 
             return allIsValid;
+        }
+
+        /// <summary>
+        /// Validate từng màn hình
+        /// </summary>
+        /// <param name="entity">Thực thể</param>
+        protected virtual bool validateCustomerGroupCustom(TEntity entity)
+        {
+            return true;
         }
 
         private bool validateRequired(TEntity entity, PropertyInfo propertyInfo)
@@ -441,20 +454,22 @@ namespace MISA.ApplicationCore
         {
             //Validate lại 1 lần nữa trên database
             int success = 0, fail = 0;
-            
             bool allIsValid = validateDataImport(ieEntities.ToList());
 
+            //Thêm từng bản ghi hợp lệ lên database và đếm thành công
             foreach(var entity in ieEntities)
             {
-                if(entity.Status.Count() > 0 && entity.Status[0].Equals("Hợp lệ"))
+                if(entity.Status.Count() > 0 && entity.Status[0].Equals(MISACode.Valid.ToString()))
                 {
                     var rowAffect = _baseRepository.Insert(entity);
                     success += rowAffect;
                 }
             }
 
+            //Số bản ghi chưa thêm thành công
             fail = ieEntities.Count() - success;
 
+            //Lưu kết quả
             _serviceResult.Data = new { successRecords = success, failRecords = fail };
             _serviceResult.Messasge = "";
             _serviceResult.MISACode = fail > 0 ? MISACode.InValid : MISACode.Success;

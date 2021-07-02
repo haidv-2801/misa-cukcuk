@@ -9,8 +9,12 @@ using Microsoft.Extensions.Logging;
 using MISA.ApplicationCore;
 using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interfaces;
+using MISA.ApplicationCore.Interfaces.IRepositories;
+using MISA.ApplicationCore.Interfaces.IServices;
+using MISA.ApplicationCore.Services;
 using MISA.Infarstructure;
 using MISA.Infrastructure;
+using MISA.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,6 +45,10 @@ namespace MISA.CukCuk.Web
             //customer
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<ICustomerService, CustomerService>();
+
+            //customer group
+            services.AddScoped<ICustomerGroupRepository, CustomerGroupRepository>();
+            services.AddScoped<ICustomerGroupService, CustomerGroupService>();
 
             //employee
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
